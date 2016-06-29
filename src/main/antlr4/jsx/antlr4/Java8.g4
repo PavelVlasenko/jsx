@@ -54,7 +54,7 @@ Total lexer+parser time 30844ms.
 grammar Java8;
 
 /*
- * Productions from §3 (Lexical Structure)
+ * Productions from ï¿½3 (Lexical Structure)
  */
 
 literal
@@ -67,7 +67,7 @@ literal
 	;
 
 /*
- * Productions from §4 (Types, Values, and Variables)
+ * Productions from ï¿½4 (Types, Values, and Variables)
  */
 
 type
@@ -192,7 +192,7 @@ wildcardBounds
 	;
 
 /*
- * Productions from §6 (Names)
+ * Productions from ï¿½6 (Names)
  */
 
 packageName
@@ -225,7 +225,7 @@ ambiguousName
 	;
 
 /*
- * Productions from §7 (Packages)
+ * Productions from ï¿½7 (Packages)
  */
 
 compilationUnit
@@ -270,7 +270,7 @@ typeDeclaration
 	;
 
 /*
- * Productions from §8 (Classes)
+ * Productions from ï¿½8 (Classes)
  */
 
 classDeclaration
@@ -564,7 +564,7 @@ enumBodyDeclarations
 	;
 
 /*
- * Productions from §9 (Interfaces)
+ * Productions from ï¿½9 (Interfaces)
  */
 
 interfaceDeclaration
@@ -697,7 +697,7 @@ singleElementAnnotation
 	;
 
 /*
- * Productions from §10 (Arrays)
+ * Productions from ï¿½10 (Arrays)
  */
 
 arrayInitializer
@@ -709,7 +709,7 @@ variableInitializerList
 	;
 
 /*
- * Productions from §14 (Blocks and Statements)
+ * Productions from ï¿½14 (Blocks and Statements)
  */
 
 block
@@ -724,7 +724,21 @@ blockStatement
 	:	localVariableDeclarationStatement
 	|	classDeclaration
 	|	statement
+	|   jsxElement
 	;
+
+// JSX parse rules
+jsxElement     :   '<' Identifier '>' content'<' '/' Identifier '>'
+            |   '<' Identifier '/>'
+            ;
+
+content     :   chardata?
+                | (jsxElement)*
+                ;
+
+chardata    :   JSX_TEXT | JSX_SEA_WS ;
+
+//==============================
 
 localVariableDeclarationStatement
 	:	localVariableDeclaration ';'
@@ -949,7 +963,7 @@ resource
 	;
 
 /*
- * Productions from §15 (Expressions)
+ * Productions from ï¿½15 (Expressions)
  */
 
 primary
@@ -1343,7 +1357,7 @@ castExpression
 
 // LEXER
 
-// §3.9 Keywords
+// ï¿½3.9 Keywords
 
 ABSTRACT : 'abstract';
 ASSERT : 'assert';
@@ -1396,7 +1410,7 @@ VOID : 'void';
 VOLATILE : 'volatile';
 WHILE : 'while';
 
-// §3.10.1 Integer Literals
+// ï¿½3.10.1 Integer Literals
 
 IntegerLiteral
 	:	DecimalIntegerLiteral
@@ -1546,7 +1560,7 @@ BinaryDigitOrUnderscore
 	|	'_'
 	;
 
-// §3.10.2 Floating-Point Literals
+// ï¿½3.10.2 Floating-Point Literals
 
 FloatingPointLiteral
 	:	DecimalFloatingPointLiteral
@@ -1607,14 +1621,14 @@ BinaryExponentIndicator
 	:	[pP]
 	;
 
-// §3.10.3 Boolean Literals
+// ï¿½3.10.3 Boolean Literals
 
 BooleanLiteral
 	:	'true'
 	|	'false'
 	;
 
-// §3.10.4 Character Literals
+// ï¿½3.10.4 Character Literals
 
 CharacterLiteral
 	:	'\'' SingleCharacter '\''
@@ -1625,7 +1639,7 @@ fragment
 SingleCharacter
 	:	~['\\]
 	;
-// §3.10.5 String Literals
+// ï¿½3.10.5 String Literals
 StringLiteral
 	:	'"' StringCharacters? '"'
 	;
@@ -1638,7 +1652,7 @@ StringCharacter
 	:	~["\\]
 	|	EscapeSequence
 	;
-// §3.10.6 Escape Sequences for Character and String Literals
+// ï¿½3.10.6 Escape Sequences for Character and String Literals
 fragment
 EscapeSequence
 	:	'\\' [btnfr"'\\]
@@ -1664,13 +1678,13 @@ UnicodeEscape
     :   '\\' 'u' HexDigit HexDigit HexDigit HexDigit
     ;
 
-// §3.10.7 The Null Literal
+// ï¿½3.10.7 The Null Literal
 
 NullLiteral
 	:	'null'
 	;
 
-// §3.11 Separators
+// ï¿½3.11 Separators
 
 LPAREN : '(';
 RPAREN : ')';
@@ -1682,7 +1696,7 @@ SEMI : ';';
 COMMA : ',';
 DOT : '.';
 
-// §3.12 Operators
+// ï¿½3.12 Operators
 
 ASSIGN : '=';
 GT : '>';
@@ -1722,7 +1736,39 @@ LSHIFT_ASSIGN : '<<=';
 RSHIFT_ASSIGN : '>>=';
 URSHIFT_ASSIGN : '>>>=';
 
-// §3.8 Identifiers (must appear after all keywords in the grammar)
+// JSX TOKENS
+//OPEN    : '<';
+//CLOSE   : '>';
+SLASH_CLOSE : '/>';
+SEA_WS      :   (' '|'\t'|'\r'? '\n')+ ;
+TEXT        :   ~[<&]+ ;
+
+JsxName        :   JsxNameStartChar JsxNameChar* ;
+
+fragment
+DIGIT       :   [0-9] ;
+
+fragment
+JsxNameChar    :   JsxNameStartChar
+            |   '-' | '_' | '.' | DIGIT
+            |   '\u00B7'
+            |   '\u0300'..'\u036F'
+            |   '\u203F'..'\u2040'
+            ;
+
+fragment
+JsxNameStartChar
+            :   [:a-zA-Z]
+            |   '\u2070'..'\u218F'
+            |   '\u2C00'..'\u2FEF'
+            |   '\u3001'..'\uD7FF'
+            |   '\uF900'..'\uFDCF'
+            |   '\uFDF0'..'\uFFFD'
+            ;
+
+
+
+// ï¿½3.8 Identifiers (must appear after all keywords in the grammar)
 
 Identifier
 	:	JavaLetter JavaLetterOrDigit*

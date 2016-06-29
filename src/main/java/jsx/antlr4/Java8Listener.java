@@ -1120,6 +1120,17 @@ public interface Java8Listener extends ParseTreeListener {
 	void exitIfThenStatement(@NotNull Java8Parser.IfThenStatementContext ctx);
 
 	/**
+	 * Enter a parse tree produced by {@link Java8Parser#content}.
+	 * @param ctx the parse tree
+	 */
+	void enterContent(@NotNull Java8Parser.ContentContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Java8Parser#content}.
+	 * @param ctx the parse tree
+	 */
+	void exitContent(@NotNull Java8Parser.ContentContext ctx);
+
+	/**
 	 * Enter a parse tree produced by {@link Java8Parser#postDecrementExpression_lf_postfixExpression}.
 	 * @param ctx the parse tree
 	 */
@@ -1857,6 +1868,17 @@ public interface Java8Listener extends ParseTreeListener {
 	void exitElementValueArrayInitializer(@NotNull Java8Parser.ElementValueArrayInitializerContext ctx);
 
 	/**
+	 * Enter a parse tree produced by {@link Java8Parser#jsxElement}.
+	 * @param ctx the parse tree
+	 */
+	void enterJsxElement(@NotNull Java8Parser.JsxElementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Java8Parser#jsxElement}.
+	 * @param ctx the parse tree
+	 */
+	void exitJsxElement(@NotNull Java8Parser.JsxElementContext ctx);
+
+	/**
 	 * Enter a parse tree produced by {@link Java8Parser#constantExpression}.
 	 * @param ctx the parse tree
 	 */
@@ -2064,6 +2086,17 @@ public interface Java8Listener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitConditionalOrExpression(@NotNull Java8Parser.ConditionalOrExpressionContext ctx);
+
+	/**
+	 * Enter a parse tree produced by {@link Java8Parser#chardata}.
+	 * @param ctx the parse tree
+	 */
+	void enterChardata(@NotNull Java8Parser.ChardataContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Java8Parser#chardata}.
+	 * @param ctx the parse tree
+	 */
+	void exitChardata(@NotNull Java8Parser.ChardataContext ctx);
 
 	/**
 	 * Enter a parse tree produced by {@link Java8Parser#typeParameterModifier}.

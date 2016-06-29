@@ -17,24 +17,13 @@ public class AstParser
     {
         String row = "package jsx.example;\n" +
                 "\n" +
-                "/**\n" +
-                " * Created by SBT-Vlasenko-PV on 29.06.2016.\n" +
-                " */\n" +
-                "public class MyTest2 {\n" +
-                "    \n" +
-                "    private String s = \"ewerwer\";\n" +
-                "\n" +
-                "    public MyTest2(String s) {\n" +
-                "        this.s = s;\n" +
-                "    }\n" +
-                "\n" +
-                "    public void dlj(String args)\n" +
+                "public class MyTest\n" +
+                "{\n" +
+                "    public void trivial()\n" +
                 "    {\n" +
-                "        Integer i = new Integer (5);\n" +
-                "        String s = new String(\"313423423\");\n" +
+                "        <div />\n" +
                 "    }\n" +
-                "    \n" +
-                "}";
+                "}\n";
 
         ANTLRInputStream input = new ANTLRInputStream(row);
         Java8Lexer lexer = new Java8Lexer(input);

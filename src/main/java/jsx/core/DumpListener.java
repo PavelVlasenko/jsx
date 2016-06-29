@@ -29,6 +29,11 @@ public class DumpListener extends Java8BaseListener
         ctx.getText();
     }
 
+    @Override
+    public void enterJsxElement(@NotNull Java8Parser.JsxElementContext ctx) {
+        super.enterJsxElement(ctx);
+    }
+
     public String getSourceCode() {
         return sourceCode;
     }
