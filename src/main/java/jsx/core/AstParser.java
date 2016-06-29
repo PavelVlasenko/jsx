@@ -13,7 +13,7 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker;
  */
 public class AstParser
 {
-    public void generateAst()
+    public ParserRuleContext generateAst()
     {
         String row = "package jsx.example;\n" +
                 "\n" +
@@ -43,8 +43,20 @@ public class AstParser
 
         ParserRuleContext tree = parser.compilationUnit();
 
+//        ParseTreeWalker walker = new ParseTreeWalker();
+//        Java8BaseListener listener = new Java8BaseListener();
+//        walker.walk(listener, tree);
+
+        return tree;
+    }
+
+    public String generateSourceCode(ParserRuleContext tree)
+    {
         ParseTreeWalker walker = new ParseTreeWalker();
-        Java8BaseListener listener = new Java8BaseListener();
+        DumpListener listener = new DumpListener();
         walker.walk(listener, tree);
+
+        String result = listener.getSourceCode();
+        return result;
     }
 }
