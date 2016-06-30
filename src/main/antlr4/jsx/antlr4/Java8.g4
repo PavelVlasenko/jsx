@@ -566,7 +566,7 @@ enumBodyDeclarations
 // JSX parse rules
 
 jsxAttributeValue
-    :   (JsxSimpleAttributeValue | JsxExpression)
+    :   Identifier
     ;
 
 jsxElement
@@ -579,7 +579,7 @@ jsxElementName
     ;
 
 jsxAttribute
-    :   jsxAttributeName '=' '\"' jsxAttributeValue '\"'
+    :   jsxAttributeName '=' jsxAttributeValue
     ;
 
 jsxAttributeName
