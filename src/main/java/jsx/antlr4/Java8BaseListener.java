@@ -12,7 +12,6 @@ import org.antlr.v4.runtime.tree.TerminalNode;
  * of the available methods.
  */
 public class Java8BaseListener implements Java8Listener {
-
 	/**
 	 * {@inheritDoc}
 	 *
@@ -129,6 +128,19 @@ public class Java8BaseListener implements Java8Listener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitArgumentList(@NotNull Java8Parser.ArgumentListContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterJsxAttributeName(@NotNull Java8Parser.JsxAttributeNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitJsxAttributeName(@NotNull Java8Parser.JsxAttributeNameContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
@@ -506,6 +518,19 @@ public class Java8BaseListener implements Java8Listener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitResult(@NotNull Java8Parser.ResultContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterJsxElementName(@NotNull Java8Parser.JsxElementNameContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitJsxElementName(@NotNull Java8Parser.JsxElementNameContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
@@ -1331,19 +1356,6 @@ public class Java8BaseListener implements Java8Listener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterContent(@NotNull Java8Parser.ContentContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitContent(@NotNull Java8Parser.ContentContext ctx) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterPostDecrementExpression_lf_postfixExpression(@NotNull Java8Parser.PostDecrementExpression_lf_postfixExpressionContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -1520,6 +1532,19 @@ public class Java8BaseListener implements Java8Listener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitFieldDeclaration(@NotNull Java8Parser.FieldDeclarationContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterJsxAttributeValue(@NotNull Java8Parser.JsxAttributeValueContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitJsxAttributeValue(@NotNull Java8Parser.JsxAttributeValueContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
@@ -2007,6 +2032,19 @@ public class Java8BaseListener implements Java8Listener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterJsxMemberExpression(@NotNull Java8Parser.JsxMemberExpressionContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitJsxMemberExpression(@NotNull Java8Parser.JsxMemberExpressionContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterNormalAnnotation(@NotNull Java8Parser.NormalAnnotationContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -2202,19 +2240,6 @@ public class Java8BaseListener implements Java8Listener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterElementValueArrayInitializer(@NotNull Java8Parser.ElementValueArrayInitializerContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitElementValueArrayInitializer(@NotNull Java8Parser.ElementValueArrayInitializerContext ctx) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterJsxElement(@NotNull Java8Parser.JsxElementContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -2222,6 +2247,19 @@ public class Java8BaseListener implements Java8Listener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitJsxElement(@NotNull Java8Parser.JsxElementContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterElementValueArrayInitializer(@NotNull Java8Parser.ElementValueArrayInitializerContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitElementValueArrayInitializer(@NotNull Java8Parser.ElementValueArrayInitializerContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
@@ -2397,6 +2435,19 @@ public class Java8BaseListener implements Java8Listener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
+	@Override public void enterJsxContent(@NotNull Java8Parser.JsxContentContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitJsxContent(@NotNull Java8Parser.JsxContentContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
 	@Override public void enterCatches(@NotNull Java8Parser.CatchesContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -2469,19 +2520,6 @@ public class Java8BaseListener implements Java8Listener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitConditionalOrExpression(@NotNull Java8Parser.ConditionalOrExpressionContext ctx) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterChardata(@NotNull Java8Parser.ChardataContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitChardata(@NotNull Java8Parser.ChardataContext ctx) { }
 
 	/**
 	 * {@inheritDoc}
@@ -3132,6 +3170,19 @@ public class Java8BaseListener implements Java8Listener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitContinueStatement(@NotNull Java8Parser.ContinueStatementContext ctx) { }
+
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterJsxAttribute(@NotNull Java8Parser.JsxAttributeContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitJsxAttribute(@NotNull Java8Parser.JsxAttributeContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

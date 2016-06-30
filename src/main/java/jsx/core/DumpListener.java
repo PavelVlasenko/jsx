@@ -30,8 +30,28 @@ public class DumpListener extends Java8BaseListener
     }
 
     @Override
+    public void enterMethodBody(@NotNull Java8Parser.MethodBodyContext ctx) {
+        super.enterMethodBody(ctx);
+    }
+
+    @Override
+    public void enterJsxElementName(@NotNull Java8Parser.JsxElementNameContext ctx) {
+        super.enterJsxElementName(ctx);
+    }
+
+    @Override
     public void enterJsxElement(@NotNull Java8Parser.JsxElementContext ctx) {
         super.enterJsxElement(ctx);
+    }
+
+    @Override
+    public void enterJsxAttributeName(@NotNull Java8Parser.JsxAttributeNameContext ctx) {
+        super.enterJsxAttributeName(ctx);
+    }
+
+    @Override
+    public void enterJsxAttributeValue(@NotNull Java8Parser.JsxAttributeValueContext ctx) {
+        super.enterJsxAttributeValue(ctx);
     }
 
     public String getSourceCode() {

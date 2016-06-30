@@ -579,7 +579,7 @@ jsxElementName
     ;
 
 jsxAttribute
-    :   jsxAttributeName '=' jsxAttributeValue
+    :   jsxAttributeName '=' '\"' jsxAttributeValue '\"'
     ;
 
 jsxAttributeName
@@ -1782,43 +1782,52 @@ JavaLetterOrDigit
 	;
 
 // JSX tokens
+fragment
 JsxExpression
     :   '{' SourceCharacter* '}'
     ;
 
+fragment
 JsxSimpleAttributeValue
-    :   (JsxSingleStringCharacters | JsxDoubleStringCharacters)
+    :   JsxSingleStringCharacters | JsxDoubleStringCharacters
     ;
 
+fragment
 JsxDoubleStringCharacters
     :   JsxSingleStringCharacter JsxSingleStringCharacter*
     ;
 
+fragment
 JsxDoubleStringCharacter
-    :   SourceCharacter ~'\u0022'
+    :   SourceCharacter ~'\"'
     ;
 
+fragment
 JsxSingleStringCharacters
     :   JsxSingleStringCharacter JsxSingleStringCharacter*
     ;
 
 fragment
 JsxSingleStringCharacter
-    :   SourceCharacter ~'\u0027'
+    :   SourceCharacter ~'\''
     ;
 
+fragment
 JsxText
     :   SourceCharacter JsxText*
     ;
 
+fragment
 JsxTextCharacter
     :   SourceCharacter ~('{' | '}' | '<' | '>')*
     ;
 
+fragment
 SourceCharacter
     :   '\u0000'..'\uFFFF'
     ;
 
+fragment
 JsxIdentifier
             :   [:a-zA-Z]
             |   '\u2070'..'\u218F'
