@@ -565,10 +565,6 @@ enumBodyDeclarations
 
 // JSX parse rules
 
-jsxAttributeValue
-    :   Identifier
-    ;
-
 jsxElement
     :   '<' jsxElementName  jsxAttribute* '>' jsxContent '<' '/' jsxElementName '>'
     |   '<' jsxElementName  jsxAttribute* '/>'
@@ -579,10 +575,14 @@ jsxElementName
     ;
 
 jsxAttribute
-    :   jsxAttributeName '=' jsxAttributeValue
+    :   jsxAttributeName '="' jsxAttributeValue '"'
     ;
 
 jsxAttributeName
+    :   Identifier
+    ;
+
+jsxAttributeValue
     :   Identifier
     ;
 
@@ -1786,12 +1786,10 @@ fragment
 JsxExpression
     :   '{' SourceCharacter* '}'
     ;
-
-fragment
-JsxSimpleAttributeValue
-    :   JsxSingleStringCharacters | JsxDoubleStringCharacters
-    ;
-
+//fragment
+//JsxSimpleAttributeValue
+//    :   JsxSingleStringCharacters | JsxDoubleStringCharacters
+//    ;
 fragment
 JsxDoubleStringCharacters
     :   JsxSingleStringCharacter JsxSingleStringCharacter*
@@ -1801,7 +1799,6 @@ fragment
 JsxDoubleStringCharacter
     :   SourceCharacter ~'\"'
     ;
-
 fragment
 JsxSingleStringCharacters
     :   JsxSingleStringCharacter JsxSingleStringCharacter*

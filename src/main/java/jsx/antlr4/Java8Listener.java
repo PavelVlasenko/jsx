@@ -1,4 +1,4 @@
-// Generated from jsx\antlr4\Java8.g4 by ANTLR 4.3
+// Generated from jsx/antlr4/Java8.g4 by ANTLR 4.3
 package jsx.antlr4;
 import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.ParseTreeListener;

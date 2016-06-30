@@ -21,7 +21,7 @@ public class AstParser
                 "{\n" +
                 "    public void trivial()\n" +
                 "    {\n" +
-                "        <div foo=\"bar\"> </div>\n" +
+                "        <div foo=\"bar\"></div>\n" +
                 "    }\n" +
                 "\n" +
                 "}\n";
