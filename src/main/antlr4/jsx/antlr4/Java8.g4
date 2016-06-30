@@ -54,7 +54,7 @@ Total lexer+parser time 30844ms.
 grammar Java8;
 
 /*
- * Productions from §3 (Lexical Structure)
+ * Productions from ï¿½3 (Lexical Structure)
  */
 
 literal
@@ -67,7 +67,7 @@ literal
 	;
 
 /*
- * Productions from §4 (Types, Values, and Variables)
+ * Productions from ï¿½4 (Types, Values, and Variables)
  */
 
 type
@@ -192,7 +192,7 @@ wildcardBounds
 	;
 
 /*
- * Productions from §6 (Names)
+ * Productions from ï¿½6 (Names)
  */
 
 packageName
@@ -225,7 +225,7 @@ ambiguousName
 	;
 
 /*
- * Productions from §7 (Packages)
+ * Productions from ï¿½7 (Packages)
  */
 
 compilationUnit
@@ -270,7 +270,7 @@ typeDeclaration
 	;
 
 /*
- * Productions from §8 (Classes)
+ * Productions from ï¿½8 (Classes)
  */
 
 classDeclaration
@@ -563,8 +563,38 @@ enumBodyDeclarations
 	:	';' classBodyDeclaration*
 	;
 
+// JSX parse rules
+
+jsxAttributeValue
+    :   (JsxSimpleAttributeValue | JsxExpression)
+    ;
+
+jsxElement
+    :   '<' jsxElementName  jsxAttribute* '>' jsxContent '<' '/' jsxElementName '>'
+    |   '<' jsxElementName  jsxAttribute* '/>'
+    ;
+
+jsxElementName
+    :   Identifier
+    ;
+
+jsxAttribute
+    :   jsxAttributeName '=' jsxAttributeValue
+    ;
+
+jsxAttributeName
+    :   Identifier
+    ;
+
+jsxContent
+    :   (jsxElement | jsxMemberExpression | COMMENT)*
+    ;
+
+jsxMemberExpression
+    : '{' Identifier* '}'
+    ;
 /*
- * Productions from §9 (Interfaces)
+ * Productions from ï¿½9 (Interfaces)
  */
 
 interfaceDeclaration
@@ -697,7 +727,7 @@ singleElementAnnotation
 	;
 
 /*
- * Productions from §10 (Arrays)
+ * Productions from ï¿½10 (Arrays)
  */
 
 arrayInitializer
@@ -709,7 +739,7 @@ variableInitializerList
 	;
 
 /*
- * Productions from §14 (Blocks and Statements)
+ * Productions from ï¿½14 (Blocks and Statements)
  */
 
 block
@@ -724,6 +754,7 @@ blockStatement
 	:	localVariableDeclarationStatement
 	|	classDeclaration
 	|	statement
+	|   jsxElement
 	;
 
 localVariableDeclarationStatement
@@ -949,7 +980,7 @@ resource
 	;
 
 /*
- * Productions from §15 (Expressions)
+ * Productions from ï¿½15 (Expressions)
  */
 
 primary
@@ -1343,7 +1374,7 @@ castExpression
 
 // LEXER
 
-// §3.9 Keywords
+// ï¿½3.9 Keywords
 
 ABSTRACT : 'abstract';
 ASSERT : 'assert';
@@ -1396,7 +1427,7 @@ VOID : 'void';
 VOLATILE : 'volatile';
 WHILE : 'while';
 
-// §3.10.1 Integer Literals
+// ï¿½3.10.1 Integer Literals
 
 IntegerLiteral
 	:	DecimalIntegerLiteral
@@ -1546,7 +1577,7 @@ BinaryDigitOrUnderscore
 	|	'_'
 	;
 
-// §3.10.2 Floating-Point Literals
+// ï¿½3.10.2 Floating-Point Literals
 
 FloatingPointLiteral
 	:	DecimalFloatingPointLiteral
@@ -1607,14 +1638,14 @@ BinaryExponentIndicator
 	:	[pP]
 	;
 
-// §3.10.3 Boolean Literals
+// ï¿½3.10.3 Boolean Literals
 
 BooleanLiteral
 	:	'true'
 	|	'false'
 	;
 
-// §3.10.4 Character Literals
+// ï¿½3.10.4 Character Literals
 
 CharacterLiteral
 	:	'\'' SingleCharacter '\''
@@ -1625,7 +1656,7 @@ fragment
 SingleCharacter
 	:	~['\\]
 	;
-// §3.10.5 String Literals
+// ï¿½3.10.5 String Literals
 StringLiteral
 	:	'"' StringCharacters? '"'
 	;
@@ -1638,7 +1669,7 @@ StringCharacter
 	:	~["\\]
 	|	EscapeSequence
 	;
-// §3.10.6 Escape Sequences for Character and String Literals
+// ï¿½3.10.6 Escape Sequences for Character and String Literals
 fragment
 EscapeSequence
 	:	'\\' [btnfr"'\\]
@@ -1664,13 +1695,13 @@ UnicodeEscape
     :   '\\' 'u' HexDigit HexDigit HexDigit HexDigit
     ;
 
-// §3.10.7 The Null Literal
+// ï¿½3.10.7 The Null Literal
 
 NullLiteral
 	:	'null'
 	;
 
-// §3.11 Separators
+// ï¿½3.11 Separators
 
 LPAREN : '(';
 RPAREN : ')';
@@ -1682,7 +1713,7 @@ SEMI : ';';
 COMMA : ',';
 DOT : '.';
 
-// §3.12 Operators
+// ï¿½3.12 Operators
 
 ASSIGN : '=';
 GT : '>';
@@ -1722,7 +1753,7 @@ LSHIFT_ASSIGN : '<<=';
 RSHIFT_ASSIGN : '>>=';
 URSHIFT_ASSIGN : '>>>=';
 
-// §3.8 Identifiers (must appear after all keywords in the grammar)
+// ï¿½3.8 Identifiers (must appear after all keywords in the grammar)
 
 Identifier
 	:	JavaLetter JavaLetterOrDigit*
@@ -1749,6 +1780,53 @@ JavaLetterOrDigit
 		[\uD800-\uDBFF] [\uDC00-\uDFFF]
 		{Character.isJavaIdentifierPart(Character.toCodePoint((char)_input.LA(-2), (char)_input.LA(-1)))}?
 	;
+
+// JSX tokens
+JsxExpression
+    :   '{' SourceCharacter* '}'
+    ;
+
+JsxSimpleAttributeValue
+    :   (JsxSingleStringCharacters | JsxDoubleStringCharacters)
+    ;
+
+JsxDoubleStringCharacters
+    :   JsxSingleStringCharacter JsxSingleStringCharacter*
+    ;
+
+JsxDoubleStringCharacter
+    :   SourceCharacter ~'\u0022'
+    ;
+
+JsxSingleStringCharacters
+    :   JsxSingleStringCharacter JsxSingleStringCharacter*
+    ;
+
+fragment
+JsxSingleStringCharacter
+    :   SourceCharacter ~'\u0027'
+    ;
+
+JsxText
+    :   SourceCharacter JsxText*
+    ;
+
+JsxTextCharacter
+    :   SourceCharacter ~('{' | '}' | '<' | '>')*
+    ;
+
+SourceCharacter
+    :   '\u0000'..'\uFFFF'
+    ;
+
+JsxIdentifier
+            :   [:a-zA-Z]
+            |   '\u2070'..'\u218F'
+            |   '\u2C00'..'\u2FEF'
+            |   '\u3001'..'\uD7FF'
+            |   '\uF900'..'\uFDCF'
+            |   '\uFDF0'..'\uFFFD'
+            ;
 
 //
 // Additional symbols not defined in the lexical specification
