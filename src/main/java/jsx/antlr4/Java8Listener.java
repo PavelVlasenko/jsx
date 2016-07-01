@@ -1,4 +1,4 @@
-// Generated from jsx/antlr4/Java8.g4 by ANTLR 4.3
+// Generated from jsx\antlr4\Java8.g4 by ANTLR 4.3
 package jsx.antlr4;
 import org.antlr.v4.runtime.misc.NotNull;
 import org.antlr.v4.runtime.tree.ParseTreeListener;
@@ -436,17 +436,6 @@ public interface Java8Listener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitResult(@NotNull Java8Parser.ResultContext ctx);
-
-	/**
-	 * Enter a parse tree produced by {@link Java8Parser#jsxElementName}.
-	 * @param ctx the parse tree
-	 */
-	void enterJsxElementName(@NotNull Java8Parser.JsxElementNameContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link Java8Parser#jsxElementName}.
-	 * @param ctx the parse tree
-	 */
-	void exitJsxElementName(@NotNull Java8Parser.JsxElementNameContext ctx);
 
 	/**
 	 * Enter a parse tree produced by {@link Java8Parser#fieldAccess_lfno_primary}.

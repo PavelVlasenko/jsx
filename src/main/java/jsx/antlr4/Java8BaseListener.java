@@ -1,4 +1,4 @@
-// Generated from jsx/antlr4/Java8.g4 by ANTLR 4.3
+// Generated from jsx\antlr4\Java8.g4 by ANTLR 4.3
 package jsx.antlr4;
 
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -518,19 +518,6 @@ public class Java8BaseListener implements Java8Listener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitResult(@NotNull Java8Parser.ResultContext ctx) { }
-
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void enterJsxElementName(@NotNull Java8Parser.JsxElementNameContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitJsxElementName(@NotNull Java8Parser.JsxElementNameContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

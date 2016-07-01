@@ -35,11 +35,6 @@ public class DumpListener extends Java8BaseListener
     }
 
     @Override
-    public void enterJsxElementName(@NotNull Java8Parser.JsxElementNameContext ctx) {
-        super.enterJsxElementName(ctx);
-    }
-
-    @Override
     public void enterJsxElement(@NotNull Java8Parser.JsxElementContext ctx) {
         super.enterJsxElement(ctx);
     }

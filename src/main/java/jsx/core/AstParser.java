@@ -1,6 +1,5 @@
 package jsx.core;
 
-import jsx.antlr4.Java8BaseListener;
 import jsx.antlr4.Java8Lexer;
 import jsx.antlr4.Java8Parser;
 import org.antlr.v4.runtime.ANTLRInputStream;
@@ -21,7 +20,7 @@ public class AstParser
                 "{\n" +
                 "    public void trivial()\n" +
                 "    {\n" +
-                "        <div foo=\"bar\"></div>\n" +
+                "        <div />\n" +
                 "    }\n" +
                 "\n" +
                 "}\n";

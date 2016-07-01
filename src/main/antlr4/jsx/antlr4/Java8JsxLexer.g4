@@ -1,8 +1,6 @@
-lexer grammar Java8Lexer;
-
+lexer grammar Java8JsxLexer;
 
 // LEXER
-
 // �3.9 Keywords
 
 ABSTRACT : 'abstract';
@@ -432,28 +430,45 @@ LINE_COMMENT
     :   '//' ~[\r\n]* -> skip
     ;
 
-JsxOpenElement
-    : '<' Identifier '>'
+// JSX tokens
+
+JsxOpeningElement
+    :   '<' JsxElementName    -> pushMode(JSX)
     ;
 
-JsxCloseElement
-    : '<' Identifier '/>'   -> pushMode(INSIDE) ;
+fragment
+JsxElementName
+    :   JsxElementNameChar*
+    ;
+
+fragment
+JsxElementNameChar
+    : [:a-z]
     ;
 
 mode JSX;
 
-// JSX tokens
+JsxClosingElement
+    :   '</' JsxElementName '>'  -> popMode
+    ;
+
+JsxSelfClosingTag
+    :   '/>'   -> popMode
+    ;
+
+JsxIdentifier
+    :   JsxIdentifierChar JsxIdentifierChar*
+    ;
+
 fragment
+JsxIdentifierChar
+    :    [:a-z]
+    ;
 
-
-
+fragment
 JsxExpression
     :   '{' SourceCharacter* '}'
     ;
-//fragment
-//JsxSimpleAttributeValue
-//    :   JsxSingleStringCharacters | JsxDoubleStringCharacters
-//    ;
 
 JsxDoubleStringCharacters
     :   JsxDoubleStringCharacter JsxDoubleStringCharacter*
@@ -488,12 +503,17 @@ SourceCharacter
     :   '\u0000'..'\uFFFF'
     ;
 
-fragment
-JsxIdentifier
-            :   [:a-zA-Z]
-            |   '\u2070'..'\u218F'
-            |   '\u2C00'..'\u2FEF'
-            |   '\u3001'..'\uD7FF'
-            |   '\uF900'..'\uFDCF'
-            |   '\uFDF0'..'\uFFFD'
-            ;
+//fragment
+//JsxIdentifier
+//            :   [:a-zA-Z]
+//            |   '\u2070'..'\u218F'
+//            |   '\u2C00'..'\u2FEF'
+//            |   '\u3001'..'\uD7FF'
+//            |   '\uF900'..'\uFDCF'
+//            |   '\uFDF0'..'\uFFFD'
+//            ;
+
+
+
+
+

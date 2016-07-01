@@ -53,6 +53,8 @@ Total lexer+parser time 30844ms.
  */
 grammar Java8;
 
+import Java8JsxLexer;
+
 /*
  * Productions from �3 (Lexical Structure)
  */
@@ -564,14 +566,15 @@ enumBodyDeclarations
 	;
 
 // JSX parse rules
+//
+//jsxElement
+//    :   '<' jsxElementName  jsxAttribute* '>' jsxContent '<' '/' jsxElementName '>'
+//    |   '<' jsxElementName  jsxAttribute* '/>'
+//    ;
 
 jsxElement
-    :   '<' jsxElementName  jsxAttribute* '>' jsxContent '<' '/' jsxElementName '>'
-    |   '<' jsxElementName  jsxAttribute* '/>'
-    ;
-
-jsxElementName
-    :   Identifier
+    :   JsxOpeningElement jsxAttribute*  '>' jsxContent  JsxClosingElement
+    |   JsxOpeningElement jsxAttribute*  JsxSelfClosingTag
     ;
 
 jsxAttribute
@@ -579,7 +582,7 @@ jsxAttribute
     ;
 
 jsxAttributeName
-    :   Identifier
+    :   JsxIdentifier
     ;
 
 jsxAttributeValue
@@ -592,7 +595,7 @@ jsxContent
     ;
 
 jsxMemberExpression
-    : '{' Identifier* '}'
+    : '{' '}'
     ;
 /*
  * Productions from �9 (Interfaces)
