@@ -108,6 +108,17 @@ public interface Java8Listener extends ParseTreeListener {
 	void exitArgumentList(@NotNull Java8Parser.ArgumentListContext ctx);
 
 	/**
+	 * Enter a parse tree produced by {@link Java8Parser#jsxAttributeName}.
+	 * @param ctx the parse tree
+	 */
+	void enterJsxAttributeName(@NotNull Java8Parser.JsxAttributeNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Java8Parser#jsxAttributeName}.
+	 * @param ctx the parse tree
+	 */
+	void exitJsxAttributeName(@NotNull Java8Parser.JsxAttributeNameContext ctx);
+
+	/**
 	 * Enter a parse tree produced by {@link Java8Parser#classBodyDeclaration}.
 	 * @param ctx the parse tree
 	 */
@@ -328,6 +339,28 @@ public interface Java8Listener extends ParseTreeListener {
 	void exitRelationalExpression(@NotNull Java8Parser.RelationalExpressionContext ctx);
 
 	/**
+	 * Enter a parse tree produced by {@link Java8Parser#jsxAttributes}.
+	 * @param ctx the parse tree
+	 */
+	void enterJsxAttributes(@NotNull Java8Parser.JsxAttributesContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Java8Parser#jsxAttributes}.
+	 * @param ctx the parse tree
+	 */
+	void exitJsxAttributes(@NotNull Java8Parser.JsxAttributesContext ctx);
+
+	/**
+	 * Enter a parse tree produced by {@link Java8Parser#jsxText}.
+	 * @param ctx the parse tree
+	 */
+	void enterJsxText(@NotNull Java8Parser.JsxTextContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Java8Parser#jsxText}.
+	 * @param ctx the parse tree
+	 */
+	void exitJsxText(@NotNull Java8Parser.JsxTextContext ctx);
+
+	/**
 	 * Enter a parse tree produced by {@link Java8Parser#referenceType}.
 	 * @param ctx the parse tree
 	 */
@@ -425,6 +458,28 @@ public interface Java8Listener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitResult(@NotNull Java8Parser.ResultContext ctx);
+
+	/**
+	 * Enter a parse tree produced by {@link Java8Parser#jsxElementName}.
+	 * @param ctx the parse tree
+	 */
+	void enterJsxElementName(@NotNull Java8Parser.JsxElementNameContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Java8Parser#jsxElementName}.
+	 * @param ctx the parse tree
+	 */
+	void exitJsxElementName(@NotNull Java8Parser.JsxElementNameContext ctx);
+
+	/**
+	 * Enter a parse tree produced by {@link Java8Parser#jsxDoubleStringCharacters}.
+	 * @param ctx the parse tree
+	 */
+	void enterJsxDoubleStringCharacters(@NotNull Java8Parser.JsxDoubleStringCharactersContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Java8Parser#jsxDoubleStringCharacters}.
+	 * @param ctx the parse tree
+	 */
+	void exitJsxDoubleStringCharacters(@NotNull Java8Parser.JsxDoubleStringCharactersContext ctx);
 
 	/**
 	 * Enter a parse tree produced by {@link Java8Parser#fieldAccess_lfno_primary}.
@@ -911,6 +966,17 @@ public interface Java8Listener extends ParseTreeListener {
 	void exitAnnotationTypeDeclaration(@NotNull Java8Parser.AnnotationTypeDeclarationContext ctx);
 
 	/**
+	 * Enter a parse tree produced by {@link Java8Parser#jsxClosingElement}.
+	 * @param ctx the parse tree
+	 */
+	void enterJsxClosingElement(@NotNull Java8Parser.JsxClosingElementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Java8Parser#jsxClosingElement}.
+	 * @param ctx the parse tree
+	 */
+	void exitJsxClosingElement(@NotNull Java8Parser.JsxClosingElementContext ctx);
+
+	/**
 	 * Enter a parse tree produced by {@link Java8Parser#compilationUnit}.
 	 * @param ctx the parse tree
 	 */
@@ -1272,6 +1338,17 @@ public interface Java8Listener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitFieldDeclaration(@NotNull Java8Parser.FieldDeclarationContext ctx);
+
+	/**
+	 * Enter a parse tree produced by {@link Java8Parser#jsxAttributeValue}.
+	 * @param ctx the parse tree
+	 */
+	void enterJsxAttributeValue(@NotNull Java8Parser.JsxAttributeValueContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Java8Parser#jsxAttributeValue}.
+	 * @param ctx the parse tree
+	 */
+	void exitJsxAttributeValue(@NotNull Java8Parser.JsxAttributeValueContext ctx);
 
 	/**
 	 * Enter a parse tree produced by {@link Java8Parser#leftHandSide}.
@@ -1714,6 +1791,17 @@ public interface Java8Listener extends ParseTreeListener {
 	void exitPrimary(@NotNull Java8Parser.PrimaryContext ctx);
 
 	/**
+	 * Enter a parse tree produced by {@link Java8Parser#jsxChild}.
+	 * @param ctx the parse tree
+	 */
+	void enterJsxChild(@NotNull Java8Parser.JsxChildContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Java8Parser#jsxChild}.
+	 * @param ctx the parse tree
+	 */
+	void exitJsxChild(@NotNull Java8Parser.JsxChildContext ctx);
+
+	/**
 	 * Enter a parse tree produced by {@link Java8Parser#classModifier}.
 	 * @param ctx the parse tree
 	 */
@@ -1778,6 +1866,17 @@ public interface Java8Listener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitPrimaryNoNewArray_lf_primary_lf_arrayAccess_lf_primary(@NotNull Java8Parser.PrimaryNoNewArray_lf_primary_lf_arrayAccess_lf_primaryContext ctx);
+
+	/**
+	 * Enter a parse tree produced by {@link Java8Parser#jsxDoubleStringCharacter}.
+	 * @param ctx the parse tree
+	 */
+	void enterJsxDoubleStringCharacter(@NotNull Java8Parser.JsxDoubleStringCharacterContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Java8Parser#jsxDoubleStringCharacter}.
+	 * @param ctx the parse tree
+	 */
+	void exitJsxDoubleStringCharacter(@NotNull Java8Parser.JsxDoubleStringCharacterContext ctx);
 
 	/**
 	 * Enter a parse tree produced by {@link Java8Parser#labeledStatement}.
@@ -1855,6 +1954,17 @@ public interface Java8Listener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitElementValueArrayInitializer(@NotNull Java8Parser.ElementValueArrayInitializerContext ctx);
+
+	/**
+	 * Enter a parse tree produced by {@link Java8Parser#jsxElement}.
+	 * @param ctx the parse tree
+	 */
+	void enterJsxElement(@NotNull Java8Parser.JsxElementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Java8Parser#jsxElement}.
+	 * @param ctx the parse tree
+	 */
+	void exitJsxElement(@NotNull Java8Parser.JsxElementContext ctx);
 
 	/**
 	 * Enter a parse tree produced by {@link Java8Parser#constantExpression}.
@@ -2110,6 +2220,28 @@ public interface Java8Listener extends ParseTreeListener {
 	void exitDimExpr(@NotNull Java8Parser.DimExprContext ctx);
 
 	/**
+	 * Enter a parse tree produced by {@link Java8Parser#jsxOpeningElement}.
+	 * @param ctx the parse tree
+	 */
+	void enterJsxOpeningElement(@NotNull Java8Parser.JsxOpeningElementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Java8Parser#jsxOpeningElement}.
+	 * @param ctx the parse tree
+	 */
+	void exitJsxOpeningElement(@NotNull Java8Parser.JsxOpeningElementContext ctx);
+
+	/**
+	 * Enter a parse tree produced by {@link Java8Parser#jsxSingleStringCharacters}.
+	 * @param ctx the parse tree
+	 */
+	void enterJsxSingleStringCharacters(@NotNull Java8Parser.JsxSingleStringCharactersContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Java8Parser#jsxSingleStringCharacters}.
+	 * @param ctx the parse tree
+	 */
+	void exitJsxSingleStringCharacters(@NotNull Java8Parser.JsxSingleStringCharactersContext ctx);
+
+	/**
 	 * Enter a parse tree produced by {@link Java8Parser#unannInterfaceType_lf_unannClassOrInterfaceType}.
 	 * @param ctx the parse tree
 	 */
@@ -2163,6 +2295,17 @@ public interface Java8Listener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitResourceSpecification(@NotNull Java8Parser.ResourceSpecificationContext ctx);
+
+	/**
+	 * Enter a parse tree produced by {@link Java8Parser#jsxSingleStringCharacter}.
+	 * @param ctx the parse tree
+	 */
+	void enterJsxSingleStringCharacter(@NotNull Java8Parser.JsxSingleStringCharacterContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Java8Parser#jsxSingleStringCharacter}.
+	 * @param ctx the parse tree
+	 */
+	void exitJsxSingleStringCharacter(@NotNull Java8Parser.JsxSingleStringCharacterContext ctx);
 
 	/**
 	 * Enter a parse tree produced by {@link Java8Parser#interfaceTypeList}.
@@ -2407,6 +2550,17 @@ public interface Java8Listener extends ParseTreeListener {
 	void exitImportDeclaration(@NotNull Java8Parser.ImportDeclarationContext ctx);
 
 	/**
+	 * Enter a parse tree produced by {@link Java8Parser#jsxSelfClosingElement}.
+	 * @param ctx the parse tree
+	 */
+	void enterJsxSelfClosingElement(@NotNull Java8Parser.JsxSelfClosingElementContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Java8Parser#jsxSelfClosingElement}.
+	 * @param ctx the parse tree
+	 */
+	void exitJsxSelfClosingElement(@NotNull Java8Parser.JsxSelfClosingElementContext ctx);
+
+	/**
 	 * Enter a parse tree produced by {@link Java8Parser#primitiveType}.
 	 * @param ctx the parse tree
 	 */
@@ -2471,6 +2625,17 @@ public interface Java8Listener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitPackageOrTypeName(@NotNull Java8Parser.PackageOrTypeNameContext ctx);
+
+	/**
+	 * Enter a parse tree produced by {@link Java8Parser#jsxChildren}.
+	 * @param ctx the parse tree
+	 */
+	void enterJsxChildren(@NotNull Java8Parser.JsxChildrenContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Java8Parser#jsxChildren}.
+	 * @param ctx the parse tree
+	 */
+	void exitJsxChildren(@NotNull Java8Parser.JsxChildrenContext ctx);
 
 	/**
 	 * Enter a parse tree produced by {@link Java8Parser#assignment}.
@@ -2614,4 +2779,15 @@ public interface Java8Listener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitContinueStatement(@NotNull Java8Parser.ContinueStatementContext ctx);
+
+	/**
+	 * Enter a parse tree produced by {@link Java8Parser#jsxAttribute}.
+	 * @param ctx the parse tree
+	 */
+	void enterJsxAttribute(@NotNull Java8Parser.JsxAttributeContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link Java8Parser#jsxAttribute}.
+	 * @param ctx the parse tree
+	 */
+	void exitJsxAttribute(@NotNull Java8Parser.JsxAttributeContext ctx);
 }

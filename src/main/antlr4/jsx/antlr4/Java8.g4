@@ -750,11 +750,11 @@ jsxElementName
     ;
 
 jsxAttributes
-    :   jsxAttribute jsxAttribute*
+    :   jsxAttribute jsxAttribute jsxAttribute
     ;
 
 jsxAttribute
-    :   jsxAttributeName '=' jsxAttributeValue
+    :   jsxAttributeName '="'jsxAttributeValue'"'
     ;
 
 jsxAttributeName
@@ -762,8 +762,8 @@ jsxAttributeName
     ;
 
 jsxAttributeValue
-    :   '"' jsxDoubleStringCharacters* '"'
-    |   '\'' jsxSingleStringCharacters* '"'
+    :   jsxDoubleStringCharacters
+    |   '\'' jsxSingleStringCharacters '\''
     |   '{' assignmentExpression '}'
     |   jsxElement
     ;
