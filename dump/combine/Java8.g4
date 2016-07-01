@@ -38,7 +38,7 @@
  *
  * You can test with
  *
- *  $ antlr4 Java8.g4
+ *  $ antlr4 Java8Parser.g4
  *  $ javac *.java
  *  $ grun Java8 compilationUnit *.java
  *

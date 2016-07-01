@@ -1,11 +1,11 @@
 package jsx.core;
 
-import jsx.antlr4.Java8BaseListener;
 import jsx.antlr4.Java8Parser;
+import jsx.antlr4.Java8ParserBaseListener;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.misc.NotNull;
 
-public class DumpListener extends Java8BaseListener
+public class DumpListener extends Java8ParserBaseListener
 {
     private String sourceCode = "";
 
@@ -45,18 +45,8 @@ public class DumpListener extends Java8BaseListener
     }
 
     @Override
-    public void enterJsxOpeningElement(@NotNull Java8Parser.JsxOpeningElementContext ctx) {
-        super.enterJsxOpeningElement(ctx);
-    }
-
-    @Override
     public void enterJsxAttributeValue(@NotNull Java8Parser.JsxAttributeValueContext ctx) {
         super.enterJsxAttributeValue(ctx);
-    }
-
-    @Override
-    public void enterJsxChild(@NotNull Java8Parser.JsxChildContext ctx) {
-        super.enterJsxChild(ctx);
     }
 
     public String getSourceCode() {

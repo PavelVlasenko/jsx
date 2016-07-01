@@ -38,7 +38,7 @@
  *
  * You can test with
  *
- *  $ antlr4 Java8.g4
+ *  $ antlr4 Java8Parser.g4
  *  $ javac *.java
  *  $ grun Java8 compilationUnit *.java
  *
@@ -51,9 +51,9 @@
 /Users/parrt/antlr/code/grammars-v4/java8/./Test.java
 Total lexer+parser time 30844ms.
  */
-parser grammar Java8;
+parser grammar Java8Parser;
 
-options { tokenVocab=Java8JsxLexer; }
+options { tokenVocab=Java8Lexer; }
 
 literal
 	:	IntegerLiteral
@@ -557,38 +557,6 @@ enumBodyDeclarations
 	:	SEMI classBodyDeclaration*
 	;
 
-// JSX parse rules
-//
-//jsxElement
-//    :   '<' jsxElementName  jsxAttribute* '>' jsxContent '<' '/' jsxElementName '>'
-//    |   '<' jsxElementName  jsxAttribute* '/>'
-//    ;
-
-jsxElement
-    :   JsxOpeningElement jsxAttribute*  '>' jsxContent  JsxClosingElement
-    |   JsxOpeningElement jsxAttribute*  JsxSelfClosingTag
-    ;
-
-jsxAttribute
-    :   jsxAttributeName ASSIGN jsxAttributeValue
-    ;
-
-jsxAttributeName
-    :   JsxIdentifier
-    ;
-
-jsxAttributeValue
-    :   '"' JsxDoubleStringCharacters '"'
-    |	'\'' JsxSingleStringCharacters '\''
-    ;
-
-jsxContent
-    :   (jsxElement | jsxMemberExpression | COMMENT)*
-    ;
-
-jsxMemberExpression
-    : LBRACE RBRACE
-    ;
 /*
  * Productions from �9 (Interfaces)
  */
@@ -1367,3 +1335,31 @@ castExpression
 	|	LPAREN referenceType additionalBound* RPAREN unaryExpressionNotPlusMinus
 	|	LPAREN referenceType additionalBound* RPAREN lambdaExpression
 	;
+
+// JSX parse rules
+
+jsxElement
+    :   JsxOpeningElement jsxAttribute*  '>' jsxContent  JsxClosingElement
+    |   JsxOpeningElement jsxAttribute*  JsxSelfClosingTag
+    ;
+
+jsxAttribute
+    :   jsxAttributeName ASSIGN jsxAttributeValue
+    ;
+
+jsxAttributeName
+    :   JsxIdentifier
+    ;
+
+jsxAttributeValue
+    :   JsxDoubleStringCharacters
+    |	JsxSingleStringCharacters
+    ;
+
+jsxContent
+    :   (jsxElement | jsxMemberExpression | COMMENT)*
+    ;
+
+jsxMemberExpression
+    : LBRACE RBRACE
+    ;

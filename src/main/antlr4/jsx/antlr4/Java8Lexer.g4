@@ -1,4 +1,4 @@
-lexer grammar Java8JsxLexer;
+lexer grammar Java8Lexer;
 
 // LEXER
 // �3.9 Keywords
@@ -431,7 +431,6 @@ LINE_COMMENT
     ;
 
 // JSX tokens
-
 JsxOpeningElement
     :   '<' JsxElementName    -> pushMode(JSX)
     ;
@@ -502,18 +501,6 @@ fragment
 SourceCharacter
     :   '\u0000'..'\uFFFF'
     ;
-
-//fragment
-//JsxIdentifier
-//            :   [:a-zA-Z]
-//            |   '\u2070'..'\u218F'
-//            |   '\u2C00'..'\u2FEF'
-//            |   '\u3001'..'\uD7FF'
-//            |   '\uF900'..'\uFDCF'
-//            |   '\uFDF0'..'\uFFFD'
-//            ;
-
-
 
 
 
