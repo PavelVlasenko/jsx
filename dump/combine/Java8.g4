@@ -53,8 +53,6 @@ Total lexer+parser time 30844ms.
  */
 grammar Java8;
 
-import Java8JsxLexer;
-
 /*
  * Productions from �3 (Lexical Structure)
  */
@@ -88,16 +86,16 @@ numericType
 	;
 
 integralType
-	:	BYTE
-	|	SHORT
-	|	INT
-	|	LONG
-	|	CHAR
+	:	'byte'
+	|	'short'
+	|	'int'
+	|	'long'
+	|	'char'
 	;
 
 floatingPointType
-	:	FLOAT
-	|	DOUBLE
+	:	'float'
+	|	'double'
 	;
 
 referenceType
@@ -117,11 +115,11 @@ classOrInterfaceType
 
 classType
 	:	annotation* Identifier typeArguments?
-	|	classOrInterfaceType DOT annotation* Identifier typeArguments?
+	|	classOrInterfaceType '.' annotation* Identifier typeArguments?
 	;
 
 classType_lf_classOrInterfaceType
-	:	DOT annotation* Identifier typeArguments?
+	:	'.' annotation* Identifier typeArguments?
 	;
 
 classType_lfno_classOrInterfaceType
@@ -151,7 +149,7 @@ arrayType
 	;
 
 dims
-	:	annotation* LBRACK RBRACK (annotation* LBRACK RBRACK)*
+	:	annotation* '[' ']' (annotation* '[' ']')*
 	;
 
 typeParameter
@@ -163,12 +161,12 @@ typeParameterModifier
 	;
 
 typeBound
-	:	EXTENDS typeVariable
-	|	EXTENDS classOrInterfaceType additionalBound*
+	:	'extends' typeVariable
+	|	'extends' classOrInterfaceType additionalBound*
 	;
 
 additionalBound
-	:	BITAND interfaceType
+	:	'&' interfaceType
 	;
 
 typeArguments
@@ -176,7 +174,7 @@ typeArguments
 	;
 
 typeArgumentList
-	:	typeArgument (COMMA typeArgument)*
+	:	typeArgument (',' typeArgument)*
 	;
 
 typeArgument
@@ -185,12 +183,12 @@ typeArgument
 	;
 
 wildcard
-	:	annotation* QUESTION wildcardBounds?
+	:	annotation* '?' wildcardBounds?
 	;
 
 wildcardBounds
-	:	EXTENDS referenceType
-	|	SUPER referenceType
+	:	'extends' referenceType
+	|	'super' referenceType
 	;
 
 /*
@@ -199,22 +197,22 @@ wildcardBounds
 
 packageName
 	:	Identifier
-	|	packageName DOT Identifier
+	|	packageName '.' Identifier
 	;
 
 typeName
 	:	Identifier
-	|	packageOrTypeName DOT Identifier
+	|	packageOrTypeName '.' Identifier
 	;
 
 packageOrTypeName
 	:	Identifier
-	|	packageOrTypeName DOT Identifier
+	|	packageOrTypeName '.' Identifier
 	;
 
 expressionName
 	:	Identifier
-	|	ambiguousName DOT Identifier
+	|	ambiguousName '.' Identifier
 	;
 
 methodName
@@ -223,7 +221,7 @@ methodName
 
 ambiguousName
 	:	Identifier
-	|	ambiguousName DOT Identifier
+	|	ambiguousName '.' Identifier
 	;
 
 /*
@@ -235,7 +233,7 @@ compilationUnit
 	;
 
 packageDeclaration
-	:	packageModifier* 'package' Identifier (DOT Identifier)* ';'
+	:	packageModifier* 'package' Identifier ('.' Identifier)* ';'
 	;
 
 packageModifier
@@ -254,15 +252,15 @@ singleTypeImportDeclaration
 	;
 
 typeImportOnDemandDeclaration
-	:	'import' packageOrTypeName DOT '*' ';'
+	:	'import' packageOrTypeName '.' '*' ';'
 	;
 
 singleStaticImportDeclaration
-	:	'import' 'static' typeName DOT Identifier ';'
+	:	'import' 'static' typeName '.' Identifier ';'
 	;
 
 staticImportOnDemandDeclaration
-	:	'import' 'static' typeName DOT '*' ';'
+	:	'import' 'static' typeName '.' '*' ';'
 	;
 
 typeDeclaration
@@ -300,23 +298,23 @@ typeParameters
 	;
 
 typeParameterList
-	:	typeParameter (COMMA typeParameter)*
+	:	typeParameter (',' typeParameter)*
 	;
 
 superclass
-	:	EXTENDS classType
+	:	'extends' classType
 	;
 
 superinterfaces
-	:	IMPLEMENTS interfaceTypeList
+	:	'implements' interfaceTypeList
 	;
 
 interfaceTypeList
-	:	interfaceType (COMMA interfaceType)*
+	:	interfaceType (',' interfaceType)*
 	;
 
 classBody
-	:	LBRACE classBodyDeclaration* RBRACE
+	:	'{' classBodyDeclaration* '}'
 	;
 
 classBodyDeclaration
@@ -350,11 +348,11 @@ fieldModifier
 	;
 
 variableDeclaratorList
-	:	variableDeclarator (COMMA variableDeclarator)*
+	:	variableDeclarator (',' variableDeclarator)*
 	;
 
 variableDeclarator
-	:	variableDeclaratorId (ASSIGN variableInitializer)?
+	:	variableDeclaratorId ('=' variableInitializer)?
 	;
 
 variableDeclaratorId
@@ -393,11 +391,11 @@ unannClassOrInterfaceType
 
 unannClassType
 	:	Identifier typeArguments?
-	|	unannClassOrInterfaceType DOT annotation* Identifier typeArguments?
+	|	unannClassOrInterfaceType '.' annotation* Identifier typeArguments?
 	;
 
 unannClassType_lf_unannClassOrInterfaceType
-	:	DOT annotation* Identifier typeArguments?
+	:	'.' annotation* Identifier typeArguments?
 	;
 
 unannClassType_lfno_unannClassOrInterfaceType
@@ -458,13 +456,13 @@ methodDeclarator
 	;
 
 formalParameterList
-	:	formalParameters COMMA lastFormalParameter
+	:	formalParameters ',' lastFormalParameter
 	|	lastFormalParameter
 	;
 
 formalParameters
-	:	formalParameter (COMMA formalParameter)*
-	|	receiverParameter (COMMA formalParameter)*
+	:	formalParameter (',' formalParameter)*
+	|	receiverParameter (',' formalParameter)*
 	;
 
 formalParameter
@@ -482,7 +480,7 @@ lastFormalParameter
 	;
 
 receiverParameter
-	:	annotation* unannType (Identifier DOT)? 'this'
+	:	annotation* unannType (Identifier '.')? 'this'
 	;
 
 throws_
@@ -490,7 +488,7 @@ throws_
 	;
 
 exceptionTypeList
-	:	exceptionType (COMMA exceptionType)*
+	:	exceptionType (',' exceptionType)*
 	;
 
 exceptionType
@@ -531,14 +529,14 @@ simpleTypeName
 	;
 
 constructorBody
-	:	LBRACE explicitConstructorInvocation? blockStatements? RBRACE
+	:	'{' explicitConstructorInvocation? blockStatements? '}'
 	;
 
 explicitConstructorInvocation
 	:	typeArguments? 'this' '(' argumentList? ')' ';'
 	|	typeArguments? 'super' '(' argumentList? ')' ';'
-	|	expressionName DOT typeArguments? 'super' '(' argumentList? ')' ';'
-	|	primary DOT typeArguments? 'super' '(' argumentList? ')' ';'
+	|	expressionName '.' typeArguments? 'super' '(' argumentList? ')' ';'
+	|	primary '.' typeArguments? 'super' '(' argumentList? ')' ';'
 	;
 
 enumDeclaration
@@ -546,11 +544,11 @@ enumDeclaration
 	;
 
 enumBody
-	:	LBRACE enumConstantList? COMMA? enumBodyDeclarations? RBRACE
+	:	'{' enumConstantList? ','? enumBodyDeclarations? '}'
 	;
 
 enumConstantList
-	:	enumConstant (COMMA enumConstant)*
+	:	enumConstant (',' enumConstant)*
 	;
 
 enumConstant
@@ -565,38 +563,6 @@ enumBodyDeclarations
 	:	';' classBodyDeclaration*
 	;
 
-// JSX parse rules
-//
-//jsxElement
-//    :   '<' jsxElementName  jsxAttribute* '>' jsxContent '<' '/' jsxElementName '>'
-//    |   '<' jsxElementName  jsxAttribute* '/>'
-//    ;
-
-jsxElement
-    :   JsxOpeningElement jsxAttribute*  '>' jsxContent  JsxClosingElement
-    |   JsxOpeningElement jsxAttribute*  JsxSelfClosingTag
-    ;
-
-jsxAttribute
-    :   jsxAttributeName ASSIGN jsxAttributeValue
-    ;
-
-jsxAttributeName
-    :   JsxIdentifier
-    ;
-
-jsxAttributeValue
-    :   '"' JsxDoubleStringCharacters '"'
-    |	'\'' JsxSingleStringCharacters '\''
-    ;
-
-jsxContent
-    :   (jsxElement | jsxMemberExpression | COMMENT)*
-    ;
-
-jsxMemberExpression
-    : LBRACE RBRACE
-    ;
 /*
  * Productions from �9 (Interfaces)
  */
@@ -621,11 +587,11 @@ interfaceModifier
 	;
 
 extendsInterfaces
-	:	EXTENDS interfaceTypeList
+	:	'extends' interfaceTypeList
 	;
 
 interfaceBody
-	:	LBRACE interfaceMemberDeclaration* RBRACE
+	:	'{' interfaceMemberDeclaration* '}'
 	;
 
 interfaceMemberDeclaration
@@ -665,7 +631,7 @@ annotationTypeDeclaration
 	;
 
 annotationTypeBody
-	:	LBRACE annotationTypeMemberDeclaration* RBRACE
+	:	'{' annotationTypeMemberDeclaration* '}'
 	;
 
 annotationTypeMemberDeclaration
@@ -701,11 +667,11 @@ normalAnnotation
 	;
 
 elementValuePairList
-	:	elementValuePair (COMMA elementValuePair)*
+	:	elementValuePair (',' elementValuePair)*
 	;
 
 elementValuePair
-	:	Identifier ASSIGN elementValue
+	:	Identifier '=' elementValue
 	;
 
 elementValue
@@ -715,11 +681,11 @@ elementValue
 	;
 
 elementValueArrayInitializer
-	:	LBRACE elementValueList? COMMA? RBRACE
+	:	'{' elementValueList? ','? '}'
 	;
 
 elementValueList
-	:	elementValue (COMMA elementValue)*
+	:	elementValue (',' elementValue)*
 	;
 
 markerAnnotation
@@ -735,11 +701,11 @@ singleElementAnnotation
  */
 
 arrayInitializer
-	:	LBRACE variableInitializerList? COMMA? RBRACE
+	:	'{' variableInitializerList? ','? '}'
 	;
 
 variableInitializerList
-	:	variableInitializer (COMMA variableInitializer)*
+	:	variableInitializer (',' variableInitializer)*
 	;
 
 /*
@@ -747,7 +713,7 @@ variableInitializerList
  */
 
 block
-	:	LBRACE blockStatements? RBRACE
+	:	'{' blockStatements? '}'
 	;
 
 blockStatements
@@ -760,6 +726,81 @@ blockStatement
 	|	statement
 	|   jsxElement
 	;
+
+// JSX parse rules
+jsxElement
+    :   jsxSelfClosingElement
+    |   jsxOpeningElement jsxChildren* jsxClosingElement
+    ;
+
+jsxSelfClosingElement
+    :   '<' jsxElementName jsxAttributes* '/>'
+    ;
+
+jsxOpeningElement
+    :   '<' jsxElementName  jsxAttributes* '>'
+    ;
+
+jsxClosingElement
+    :   '</' jsxElementName '>'
+    ;
+
+jsxElementName
+    :   Identifier
+    ;
+
+jsxAttributes
+    :   jsxAttribute jsxAttribute jsxAttribute
+    ;
+
+jsxAttribute
+    :   jsxAttributeName '="'jsxAttributeValue'"'
+    ;
+
+jsxAttributeName
+    :   Identifier
+    ;
+
+jsxAttributeValue
+    :   jsxDoubleStringCharacters
+    |   '\'' jsxSingleStringCharacters '\''
+    |   '{' assignmentExpression '}'
+    |   jsxElement
+    ;
+
+jsxDoubleStringCharacters
+    :   Identifier
+ //   :   jsxDoubleStringCharacter jsxDoubleStringCharacters*
+    ;
+
+jsxDoubleStringCharacter
+    :   Identifier
+    ;
+
+jsxSingleStringCharacters
+    :   Identifier
+//    :   jsxSingleStringCharacter  jsxSingleStringCharacters*
+    ;
+
+jsxSingleStringCharacter
+    :   Identifier
+    ;
+
+jsxChildren
+    :   jsxChild jsxChildren*
+    ;
+
+jsxChild
+    :   jsxText
+    |   jsxElement
+    |   '{' assignmentExpression* '}'
+    ;
+
+jsxText
+    :   Identifier
+    ;
+
+//End JSX parse rules==========================
 
 localVariableDeclarationStatement
 	:	localVariableDeclaration ';'
@@ -806,11 +847,11 @@ emptyStatement
 	;
 
 labeledStatement
-	:	Identifier COLON statement
+	:	Identifier ':' statement
 	;
 
 labeledStatementNoShortIf
-	:	Identifier COLON statementNoShortIf
+	:	Identifier ':' statementNoShortIf
 	;
 
 expressionStatement
@@ -841,7 +882,7 @@ ifThenElseStatementNoShortIf
 
 assertStatement
 	:	'assert' expression ';'
-	|	'assert' expression COLON expression ';'
+	|	'assert' expression ':' expression ';'
 	;
 
 switchStatement
@@ -849,7 +890,7 @@ switchStatement
 	;
 
 switchBlock
-	:	LBRACE switchBlockStatementGroup* switchLabel* RBRACE
+	:	'{' switchBlockStatementGroup* switchLabel* '}'
 	;
 
 switchBlockStatementGroup
@@ -861,9 +902,9 @@ switchLabels
 	;
 
 switchLabel
-	:	'case' constantExpression COLON
-	|	'case' enumConstantName COLON
-	|	'default' COLON
+	:	'case' constantExpression ':'
+	|	'case' enumConstantName ':'
+	|	'default' ':'
 	;
 
 enumConstantName
@@ -910,15 +951,15 @@ forUpdate
 	;
 
 statementExpressionList
-	:	statementExpression (COMMA statementExpression)*
+	:	statementExpression (',' statementExpression)*
 	;
 
 enhancedForStatement
-	:	'for' '(' variableModifier* unannType variableDeclaratorId COLON expression ')' statement
+	:	'for' '(' variableModifier* unannType variableDeclaratorId ':' expression ')' statement
 	;
 
 enhancedForStatementNoShortIf
-	:	'for' '(' variableModifier* unannType variableDeclaratorId COLON expression ')' statementNoShortIf
+	:	'for' '(' variableModifier* unannType variableDeclaratorId ':' expression ')' statementNoShortIf
 	;
 
 breakStatement
@@ -980,7 +1021,7 @@ resourceList
 	;
 
 resource
-	:	variableModifier* unannType variableDeclaratorId ASSIGN expression
+	:	variableModifier* unannType variableDeclaratorId '=' expression
 	;
 
 /*
@@ -997,10 +1038,10 @@ primary
 
 primaryNoNewArray
 	:	literal
-	|	typeName (LBRACK RBRACK)* DOT 'class'
-	|	'void' DOT 'class'
+	|	typeName ('[' ']')* '.' 'class'
+	|	'void' '.' 'class'
 	|	'this'
-	|	typeName DOT 'this'
+	|	typeName '.' 'this'
 	|	'(' expression ')'
 	|	classInstanceCreationExpression
 	|	fieldAccess
@@ -1015,10 +1056,10 @@ primaryNoNewArray_lf_arrayAccess
 
 primaryNoNewArray_lfno_arrayAccess
 	:	literal
-	|	typeName (LBRACK RBRACK)* DOT 'class'
-	|	'void' DOT 'class'
+	|	typeName ('[' ']')* '.' 'class'
+	|	'void' '.' 'class'
 	|	'this'
-	|	typeName DOT 'this'
+	|	typeName '.' 'this'
 	|	'(' expression ')'
 	|	classInstanceCreationExpression
 	|	fieldAccess
@@ -1047,11 +1088,11 @@ primaryNoNewArray_lf_primary_lfno_arrayAccess_lf_primary
 
 primaryNoNewArray_lfno_primary
 	:	literal
-	|	typeName (LBRACK RBRACK)* DOT 'class'
-	|	unannPrimitiveType (LBRACK RBRACK)* DOT 'class'
-	|	'void' DOT 'class'
+	|	typeName ('[' ']')* '.' 'class'
+	|	unannPrimitiveType ('[' ']')* '.' 'class'
+	|	'void' '.' 'class'
 	|	'this'
-	|	typeName DOT 'this'
+	|	typeName '.' 'this'
 	|	'(' expression ')'
 	|	classInstanceCreationExpression_lfno_primary
 	|	fieldAccess_lfno_primary
@@ -1066,11 +1107,11 @@ primaryNoNewArray_lfno_primary_lf_arrayAccess_lfno_primary
 
 primaryNoNewArray_lfno_primary_lfno_arrayAccess_lfno_primary
 	:	literal
-	|	typeName (LBRACK RBRACK)* DOT 'class'
-	|	unannPrimitiveType (LBRACK RBRACK)* DOT 'class'
-	|	'void' DOT 'class'
+	|	typeName ('[' ']')* '.' 'class'
+	|	unannPrimitiveType ('[' ']')* '.' 'class'
+	|	'void' '.' 'class'
 	|	'this'
-	|	typeName DOT 'this'
+	|	typeName '.' 'this'
 	|	'(' expression ')'
 	|	classInstanceCreationExpression_lfno_primary
 	|	fieldAccess_lfno_primary
@@ -1079,18 +1120,18 @@ primaryNoNewArray_lfno_primary_lfno_arrayAccess_lfno_primary
 	;
 
 classInstanceCreationExpression
-	:	'new' typeArguments? annotation* Identifier (DOT annotation* Identifier)* typeArgumentsOrDiamond? '(' argumentList? ')' classBody?
-	|	expressionName DOT 'new' typeArguments? annotation* Identifier typeArgumentsOrDiamond? '(' argumentList? ')' classBody?
-	|	primary DOT 'new' typeArguments? annotation* Identifier typeArgumentsOrDiamond? '(' argumentList? ')' classBody?
+	:	'new' typeArguments? annotation* Identifier ('.' annotation* Identifier)* typeArgumentsOrDiamond? '(' argumentList? ')' classBody?
+	|	expressionName '.' 'new' typeArguments? annotation* Identifier typeArgumentsOrDiamond? '(' argumentList? ')' classBody?
+	|	primary '.' 'new' typeArguments? annotation* Identifier typeArgumentsOrDiamond? '(' argumentList? ')' classBody?
 	;
 
 classInstanceCreationExpression_lf_primary
-	:	DOT 'new' typeArguments? annotation* Identifier typeArgumentsOrDiamond? '(' argumentList? ')' classBody?
+	:	'.' 'new' typeArguments? annotation* Identifier typeArgumentsOrDiamond? '(' argumentList? ')' classBody?
 	;
 
 classInstanceCreationExpression_lfno_primary
-	:	'new' typeArguments? annotation* Identifier (DOT annotation* Identifier)* typeArgumentsOrDiamond? '(' argumentList? ')' classBody?
-	|	expressionName DOT 'new' typeArguments? annotation* Identifier typeArgumentsOrDiamond? '(' argumentList? ')' classBody?
+	:	'new' typeArguments? annotation* Identifier ('.' annotation* Identifier)* typeArgumentsOrDiamond? '(' argumentList? ')' classBody?
+	|	expressionName '.' 'new' typeArguments? annotation* Identifier typeArgumentsOrDiamond? '(' argumentList? ')' classBody?
 	;
 
 typeArgumentsOrDiamond
@@ -1099,66 +1140,66 @@ typeArgumentsOrDiamond
 	;
 
 fieldAccess
-	:	primary DOT Identifier
-	|	'super' DOT Identifier
-	|	typeName DOT 'super' DOT Identifier
+	:	primary '.' Identifier
+	|	'super' '.' Identifier
+	|	typeName '.' 'super' '.' Identifier
 	;
 
 fieldAccess_lf_primary
-	:	DOT Identifier
+	:	'.' Identifier
 	;
 
 fieldAccess_lfno_primary
-	:	'super' DOT Identifier
-	|	typeName DOT 'super' DOT Identifier
+	:	'super' '.' Identifier
+	|	typeName '.' 'super' '.' Identifier
 	;
 
 arrayAccess
-	:	(	expressionName LBRACK expression RBRACK
-		|	primaryNoNewArray_lfno_arrayAccess LBRACK expression RBRACK
+	:	(	expressionName '[' expression ']'
+		|	primaryNoNewArray_lfno_arrayAccess '[' expression ']'
 		)
-		(	primaryNoNewArray_lf_arrayAccess LBRACK expression RBRACK
+		(	primaryNoNewArray_lf_arrayAccess '[' expression ']'
 		)*
 	;
 
 arrayAccess_lf_primary
-	:	(	primaryNoNewArray_lf_primary_lfno_arrayAccess_lf_primary LBRACK expression RBRACK
+	:	(	primaryNoNewArray_lf_primary_lfno_arrayAccess_lf_primary '[' expression ']'
 		)
-		(	primaryNoNewArray_lf_primary_lf_arrayAccess_lf_primary LBRACK expression RBRACK
+		(	primaryNoNewArray_lf_primary_lf_arrayAccess_lf_primary '[' expression ']'
 		)*
 	;
 
 arrayAccess_lfno_primary
-	:	(	expressionName LBRACK expression RBRACK
-		|	primaryNoNewArray_lfno_primary_lfno_arrayAccess_lfno_primary LBRACK expression RBRACK
+	:	(	expressionName '[' expression ']'
+		|	primaryNoNewArray_lfno_primary_lfno_arrayAccess_lfno_primary '[' expression ']'
 		)
-		(	primaryNoNewArray_lfno_primary_lf_arrayAccess_lfno_primary LBRACK expression RBRACK
+		(	primaryNoNewArray_lfno_primary_lf_arrayAccess_lfno_primary '[' expression ']'
 		)*
 	;
 
 methodInvocation
 	:	methodName '(' argumentList? ')'
-	|	typeName DOT typeArguments? Identifier '(' argumentList? ')'
-	|	expressionName DOT typeArguments? Identifier '(' argumentList? ')'
-	|	primary DOT typeArguments? Identifier '(' argumentList? ')'
-	|	'super' DOT typeArguments? Identifier '(' argumentList? ')'
-	|	typeName DOT 'super' DOT typeArguments? Identifier '(' argumentList? ')'
+	|	typeName '.' typeArguments? Identifier '(' argumentList? ')'
+	|	expressionName '.' typeArguments? Identifier '(' argumentList? ')'
+	|	primary '.' typeArguments? Identifier '(' argumentList? ')'
+	|	'super' '.' typeArguments? Identifier '(' argumentList? ')'
+	|	typeName '.' 'super' '.' typeArguments? Identifier '(' argumentList? ')'
 	;
 
 methodInvocation_lf_primary
-	:	DOT typeArguments? Identifier '(' argumentList? ')'
+	:	'.' typeArguments? Identifier '(' argumentList? ')'
 	;
 
 methodInvocation_lfno_primary
 	:	methodName '(' argumentList? ')'
-	|	typeName DOT typeArguments? Identifier '(' argumentList? ')'
-	|	expressionName DOT typeArguments? Identifier '(' argumentList? ')'
-	|	'super' DOT typeArguments? Identifier '(' argumentList? ')'
-	|	typeName DOT 'super' DOT typeArguments? Identifier '(' argumentList? ')'
+	|	typeName '.' typeArguments? Identifier '(' argumentList? ')'
+	|	expressionName '.' typeArguments? Identifier '(' argumentList? ')'
+	|	'super' '.' typeArguments? Identifier '(' argumentList? ')'
+	|	typeName '.' 'super' '.' typeArguments? Identifier '(' argumentList? ')'
 	;
 
 argumentList
-	:	expression (COMMA expression)*
+	:	expression (',' expression)*
 	;
 
 methodReference
@@ -1166,7 +1207,7 @@ methodReference
 	|	referenceType '::' typeArguments? Identifier
 	|	primary '::' typeArguments? Identifier
 	|	'super' '::' typeArguments? Identifier
-	|	typeName DOT 'super' '::' typeArguments? Identifier
+	|	typeName '.' 'super' '::' typeArguments? Identifier
 	|	classType '::' typeArguments? 'new'
 	|	arrayType '::' 'new'
 	;
@@ -1179,7 +1220,7 @@ methodReference_lfno_primary
 	:	expressionName '::' typeArguments? Identifier
 	|	referenceType '::' typeArguments? Identifier
 	|	'super' '::' typeArguments? Identifier
-	|	typeName DOT 'super' '::' typeArguments? Identifier
+	|	typeName '.' 'super' '::' typeArguments? Identifier
 	|	classType '::' typeArguments? 'new'
 	|	arrayType '::' 'new'
 	;
@@ -1196,7 +1237,7 @@ dimExprs
 	;
 
 dimExpr
-	:	annotation* LBRACK expression RBRACK
+	:	annotation* '[' expression ']'
 	;
 
 constantExpression
@@ -1219,7 +1260,7 @@ lambdaParameters
 	;
 
 inferredFormalParameterList
-	:	Identifier (COMMA Identifier)*
+	:	Identifier (',' Identifier)*
 	;
 
 lambdaBody
@@ -1243,7 +1284,7 @@ leftHandSide
 	;
 
 assignmentOperator
-	:	ASSIGN
+	:	'='
 	|	'*='
 	|	'/='
 	|	'%='
@@ -1259,7 +1300,7 @@ assignmentOperator
 
 conditionalExpression
 	:	conditionalOrExpression
-	|	conditionalOrExpression QUESTION expression COLON conditionalExpression
+	|	conditionalOrExpression '?' expression ':' conditionalExpression
 	;
 
 conditionalOrExpression
@@ -1284,12 +1325,12 @@ exclusiveOrExpression
 
 andExpression
 	:	equalityExpression
-	|	andExpression BITAND equalityExpression
+	|	andExpression '&' equalityExpression
 	;
 
 equalityExpression
 	:	relationalExpression
-	|	equalityExpression EQUAL relationalExpression
+	|	equalityExpression '==' relationalExpression
 	|	equalityExpression '!=' relationalExpression
 	;
 
@@ -1375,3 +1416,434 @@ castExpression
 	|	'(' referenceType additionalBound* ')' unaryExpressionNotPlusMinus
 	|	'(' referenceType additionalBound* ')' lambdaExpression
 	;
+
+// LEXER
+
+// �3.9 Keywords
+
+ABSTRACT : 'abstract';
+ASSERT : 'assert';
+BOOLEAN : 'boolean';
+BREAK : 'break';
+BYTE : 'byte';
+CASE : 'case';
+CATCH : 'catch';
+CHAR : 'char';
+CLASS : 'class';
+CONST : 'const';
+CONTINUE : 'continue';
+DEFAULT : 'default';
+DO : 'do';
+DOUBLE : 'double';
+ELSE : 'else';
+ENUM : 'enum';
+EXTENDS : 'extends';
+FINAL : 'final';
+FINALLY : 'finally';
+FLOAT : 'float';
+FOR : 'for';
+IF : 'if';
+GOTO : 'goto';
+IMPLEMENTS : 'implements';
+IMPORT : 'import';
+INSTANCEOF : 'instanceof';
+INT : 'int';
+INTERFACE : 'interface';
+LONG : 'long';
+NATIVE : 'native';
+NEW : 'new';
+PACKAGE : 'package';
+PRIVATE : 'private';
+PROTECTED : 'protected';
+PUBLIC : 'public';
+RETURN : 'return';
+SHORT : 'short';
+STATIC : 'static';
+STRICTFP : 'strictfp';
+SUPER : 'super';
+SWITCH : 'switch';
+SYNCHRONIZED : 'synchronized';
+THIS : 'this';
+THROW : 'throw';
+THROWS : 'throws';
+TRANSIENT : 'transient';
+TRY : 'try';
+VOID : 'void';
+VOLATILE : 'volatile';
+WHILE : 'while';
+
+// �3.10.1 Integer Literals
+
+IntegerLiteral
+	:	DecimalIntegerLiteral
+	|	HexIntegerLiteral
+	|	OctalIntegerLiteral
+	|	BinaryIntegerLiteral
+	;
+
+fragment
+DecimalIntegerLiteral
+	:	DecimalNumeral IntegerTypeSuffix?
+	;
+
+fragment
+HexIntegerLiteral
+	:	HexNumeral IntegerTypeSuffix?
+	;
+
+fragment
+OctalIntegerLiteral
+	:	OctalNumeral IntegerTypeSuffix?
+	;
+
+fragment
+BinaryIntegerLiteral
+	:	BinaryNumeral IntegerTypeSuffix?
+	;
+
+fragment
+IntegerTypeSuffix
+	:	[lL]
+	;
+
+fragment
+DecimalNumeral
+	:	'0'
+	|	NonZeroDigit (Digits? | Underscores Digits)
+	;
+
+fragment
+Digits
+	:	Digit (DigitsAndUnderscores? Digit)?
+	;
+
+fragment
+Digit
+	:	'0'
+	|	NonZeroDigit
+	;
+
+fragment
+NonZeroDigit
+	:	[1-9]
+	;
+
+fragment
+DigitsAndUnderscores
+	:	DigitOrUnderscore+
+	;
+
+fragment
+DigitOrUnderscore
+	:	Digit
+	|	'_'
+	;
+
+fragment
+Underscores
+	:	'_'+
+	;
+
+fragment
+HexNumeral
+	:	'0' [xX] HexDigits
+	;
+
+fragment
+HexDigits
+	:	HexDigit (HexDigitsAndUnderscores? HexDigit)?
+	;
+
+fragment
+HexDigit
+	:	[0-9a-fA-F]
+	;
+
+fragment
+HexDigitsAndUnderscores
+	:	HexDigitOrUnderscore+
+	;
+
+fragment
+HexDigitOrUnderscore
+	:	HexDigit
+	|	'_'
+	;
+
+fragment
+OctalNumeral
+	:	'0' Underscores? OctalDigits
+	;
+
+fragment
+OctalDigits
+	:	OctalDigit (OctalDigitsAndUnderscores? OctalDigit)?
+	;
+
+fragment
+OctalDigit
+	:	[0-7]
+	;
+
+fragment
+OctalDigitsAndUnderscores
+	:	OctalDigitOrUnderscore+
+	;
+
+fragment
+OctalDigitOrUnderscore
+	:	OctalDigit
+	|	'_'
+	;
+
+fragment
+BinaryNumeral
+	:	'0' [bB] BinaryDigits
+	;
+
+fragment
+BinaryDigits
+	:	BinaryDigit (BinaryDigitsAndUnderscores? BinaryDigit)?
+	;
+
+fragment
+BinaryDigit
+	:	[01]
+	;
+
+fragment
+BinaryDigitsAndUnderscores
+	:	BinaryDigitOrUnderscore+
+	;
+
+fragment
+BinaryDigitOrUnderscore
+	:	BinaryDigit
+	|	'_'
+	;
+
+// �3.10.2 Floating-Point Literals
+
+FloatingPointLiteral
+	:	DecimalFloatingPointLiteral
+	|	HexadecimalFloatingPointLiteral
+	;
+
+fragment
+DecimalFloatingPointLiteral
+	:	Digits '.' Digits? ExponentPart? FloatTypeSuffix?
+	|	'.' Digits ExponentPart? FloatTypeSuffix?
+	|	Digits ExponentPart FloatTypeSuffix?
+	|	Digits FloatTypeSuffix
+	;
+
+fragment
+ExponentPart
+	:	ExponentIndicator SignedInteger
+	;
+
+fragment
+ExponentIndicator
+	:	[eE]
+	;
+
+fragment
+SignedInteger
+	:	Sign? Digits
+	;
+
+fragment
+Sign
+	:	[+-]
+	;
+
+fragment
+FloatTypeSuffix
+	:	[fFdD]
+	;
+
+fragment
+HexadecimalFloatingPointLiteral
+	:	HexSignificand BinaryExponent FloatTypeSuffix?
+	;
+
+fragment
+HexSignificand
+	:	HexNumeral '.'?
+	|	'0' [xX] HexDigits? '.' HexDigits
+	;
+
+fragment
+BinaryExponent
+	:	BinaryExponentIndicator SignedInteger
+	;
+
+fragment
+BinaryExponentIndicator
+	:	[pP]
+	;
+
+// �3.10.3 Boolean Literals
+
+BooleanLiteral
+	:	'true'
+	|	'false'
+	;
+
+// �3.10.4 Character Literals
+
+CharacterLiteral
+	:	'\'' SingleCharacter '\''
+	|	'\'' EscapeSequence '\''
+	;
+
+fragment
+SingleCharacter
+	:	~['\\]
+	;
+// �3.10.5 String Literals
+StringLiteral
+	:	'"' StringCharacters? '"'
+	;
+fragment
+StringCharacters
+	:	StringCharacter+
+	;
+fragment
+StringCharacter
+	:	~["\\]
+	|	EscapeSequence
+	;
+// �3.10.6 Escape Sequences for Character and String Literals
+fragment
+EscapeSequence
+	:	'\\' [btnfr"'\\]
+	|	OctalEscape
+    |   UnicodeEscape // This is not in the spec but prevents having to preprocess the input
+	;
+
+fragment
+OctalEscape
+	:	'\\' OctalDigit
+	|	'\\' OctalDigit OctalDigit
+	|	'\\' ZeroToThree OctalDigit OctalDigit
+	;
+
+fragment
+ZeroToThree
+	:	[0-3]
+	;
+
+// This is not in the spec but prevents having to preprocess the input
+fragment
+UnicodeEscape
+    :   '\\' 'u' HexDigit HexDigit HexDigit HexDigit
+    ;
+
+// �3.10.7 The Null Literal
+
+NullLiteral
+	:	'null'
+	;
+
+// �3.11 Separators
+
+LPAREN : '(';
+RPAREN : ')';
+LBRACE : '{';
+RBRACE : '}';
+LBRACK : '[';
+RBRACK : ']';
+SEMI : ';';
+COMMA : ',';
+DOT : '.';
+
+// �3.12 Operators
+
+ASSIGN : '=';
+GT : '>';
+LT : '<';
+BANG : '!';
+TILDE : '~';
+QUESTION : '?';
+COLON : ':';
+EQUAL : '==';
+LE : '<=';
+GE : '>=';
+NOTEQUAL : '!=';
+AND : '&&';
+OR : '||';
+INC : '++';
+DEC : '--';
+ADD : '+';
+SUB : '-';
+MUL : '*';
+DIV : '/';
+BITAND : '&';
+BITOR : '|';
+CARET : '^';
+MOD : '%';
+ARROW : '->';
+COLONCOLON : '::';
+
+ADD_ASSIGN : '+=';
+SUB_ASSIGN : '-=';
+MUL_ASSIGN : '*=';
+DIV_ASSIGN : '/=';
+AND_ASSIGN : '&=';
+OR_ASSIGN : '|=';
+XOR_ASSIGN : '^=';
+MOD_ASSIGN : '%=';
+LSHIFT_ASSIGN : '<<=';
+RSHIFT_ASSIGN : '>>=';
+URSHIFT_ASSIGN : '>>>=';
+
+// �3.8 Identifiers (must appear after all keywords in the grammar)
+
+Identifier
+	:	JavaLetter JavaLetterOrDigit*
+	;
+
+fragment
+JavaLetter
+	:	[a-zA-Z$_] // these are the "java letters" below 0x7F
+	|	// covers all characters above 0x7F which are not a surrogate
+		~[\u0000-\u007F\uD800-\uDBFF]
+		{Character.isJavaIdentifierStart(_input.LA(-1))}?
+	|	// covers UTF-16 surrogate pairs encodings for U+10000 to U+10FFFF
+		[\uD800-\uDBFF] [\uDC00-\uDFFF]
+		{Character.isJavaIdentifierStart(Character.toCodePoint((char)_input.LA(-2), (char)_input.LA(-1)))}?
+	;
+
+fragment
+JavaLetterOrDigit
+	:	[a-zA-Z0-9$_] // these are the "java letters or digits" below 0x7F
+	|	// covers all characters above 0x7F which are not a surrogate
+		~[\u0000-\u007F\uD800-\uDBFF]
+		{Character.isJavaIdentifierPart(_input.LA(-1))}?
+	|	// covers UTF-16 surrogate pairs encodings for U+10000 to U+10FFFF
+		[\uD800-\uDBFF] [\uDC00-\uDFFF]
+		{Character.isJavaIdentifierPart(Character.toCodePoint((char)_input.LA(-2), (char)_input.LA(-1)))}?
+	;
+
+//
+// Additional symbols not defined in the lexical specification
+//
+
+AT : '@';
+ELLIPSIS : '...';
+
+//
+// Whitespace and comments
+//
+
+WS  :  [ \t\r\n\u000C]+ -> skip
+    ;
+
+COMMENT
+    :   '/*' .*? '*/' -> skip
+    ;
+
+LINE_COMMENT
+    :   '//' ~[\r\n]* -> skip
+    ;

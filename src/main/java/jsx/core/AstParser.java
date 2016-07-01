@@ -14,16 +14,7 @@ public class AstParser
 {
     public ParserRuleContext generateAst()
     {
-        String row = "package jsx.example;\n" +
-                "\n" +
-                "public class MyTest\n" +
-                "{\n" +
-                "    public void trivial()\n" +
-                "    {\n" +
-                "        <div foo=\"bara\" jak=\"dc\"></div>\n" +
-                "    }\n" +
-                "\n" +
-                "}\n";
+        String row = "";
 
         ANTLRInputStream input = new ANTLRInputStream(row);
         Java8Lexer lexer = new Java8Lexer(input);
