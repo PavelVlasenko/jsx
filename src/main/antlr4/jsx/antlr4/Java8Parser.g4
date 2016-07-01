@@ -1339,8 +1339,8 @@ castExpression
 // JSX parse rules
 
 jsxElement
-    :   JsxOpeningElement jsxAttribute*  '>' jsxContent  JsxClosingElement
-    |   JsxOpeningElement jsxAttribute*  JsxSelfClosingTag
+  //  :   JsxOpeningElement jsxAttribute*  GT jsxContent  JsxClosingElement
+    :   JsxOpeningElement jsxAttribute*  JsxSelfClosingTag
     ;
 
 jsxAttribute

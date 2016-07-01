@@ -49,6 +49,11 @@ public class DumpListener extends Java8ParserBaseListener
         super.enterJsxAttributeValue(ctx);
     }
 
+    @Override
+    public void enterMethodInvocation(@NotNull Java8Parser.MethodInvocationContext ctx) {
+        super.enterMethodInvocation(ctx);
+    }
+
     public String getSourceCode() {
         return sourceCode;
     }

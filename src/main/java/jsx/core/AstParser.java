@@ -14,49 +14,17 @@ public class AstParser
 {
     public ParserRuleContext generateAst()
     {
-        String row = "package jsx.core;\n" +
+        String row = "package jsx.example;\n" +
                 "\n" +
-                "import jsx.antlr4.Java8;\n" +
-                "import jsx.antlr4.Java8Lexer;\n" +
-                "import jsx.antlr4.Java8Parser;\n" +
-                "import org.antlr.v4.runtime.ANTLRInputStream;\n" +
-                "import org.antlr.v4.runtime.CommonTokenStream;\n" +
-                "import org.antlr.v4.runtime.ParserRuleContext;\n" +
-                "import org.antlr.v4.runtime.tree.ParseTreeWalker;\n" +
-                "\n" +
-                "/**\n" +
-                " * @author Pavel Vlasenko\n" +
-                " */\n" +
-                "public class AstParser\n" +
+                "public class MyTest\n" +
                 "{\n" +
-                "    public ParserRuleContext generateAst()\n" +
+                "    public void trivial()\n" +
                 "    {\n" +
-                "        String row = \"\";\n" +
+                "        <  div  />" +
                 "\n" +
-                "        ANTLRInputStream input = new ANTLRInputStream(row);\n" +
-                "        Java8Lexer lexer = new Java8Lexer(input);\n" +
-                "        CommonTokenStream tokens = new CommonTokenStream(lexer);\n" +
-                "        Java8 parser = new Java8(tokens);\n" +
-                "\n" +
-                "        ParserRuleContext tree = parser.compilationUnit();\n" +
-                "\n" +
-                "//        ParseTreeWalker walker = new ParseTreeWalker();\n" +
-                "//        Java8BaseListener listener = new Java8BaseListener();\n" +
-                "//        walker.walk(listener, tree);\n" +
-                "\n" +
-                "        return tree;\n" +
+                "System.out.println();" +
                 "    }\n" +
                 "\n" +
-                "\n" +
-                "    public String generateSourceCode(ParserRuleContext tree)\n" +
-                "    {\n" +
-                "        ParseTreeWalker walker = new ParseTreeWalker();\n" +
-                "        DumpListener listener = new DumpListener();\n" +
-                "        walker.walk(listener, tree);\n" +
-                "\n" +
-                "        String result = listener.getSourceCode();\n" +
-                "        return result;\n" +
-                "    }\n" +
                 "}\n";
 
         ANTLRInputStream input = new ANTLRInputStream(row);

@@ -4,7 +4,7 @@
 //{
 //    public void trivial()
 //    {
-//        <div foo="bara"> </div>
+//        <div/>
 //    }
 //
 //}

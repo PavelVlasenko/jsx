@@ -437,12 +437,17 @@ JsxOpeningElement
 
 fragment
 JsxElementName
-    :   JsxElementNameChar*
+    :   JsxElementNameChars
     ;
 
 fragment
+JsxElementNameChars
+	:	JsxElementNameChar JsxElementNameChars*
+	;
+
+fragment
 JsxElementNameChar
-    : [:a-z]
+    : 	[:a-z]
     ;
 
 mode JSX;
@@ -470,7 +475,8 @@ JsxExpression
     ;
 
 JsxDoubleStringCharacters
-    :   JsxDoubleStringCharacter JsxDoubleStringCharacter*
+//    :   JsxDoubleStringCharacter JsxDoubleStringCharacter*
+: 'asdaskjdhkajsdb'
     ;
 
 fragment
@@ -479,7 +485,8 @@ JsxDoubleStringCharacter
     ;
 
 JsxSingleStringCharacters
-    :   JsxSingleStringCharacter JsxSingleStringCharacter*
+//    :   JsxSingleStringCharacter JsxSingleStringCharacter*
+:'asdjbadsmsabm'
     ;
 
 fragment
@@ -500,6 +507,17 @@ JsxTextCharacter
 fragment
 SourceCharacter
     :   '\u0000'..'\uFFFF'
+    ;
+
+JSX_WS  :  [ \t\r\n\u000C]+ -> skip
+    ;
+
+JSX_COMMENT
+    :   '/*' .*? '*/' -> skip
+    ;
+
+JSX_LINE_COMMENT
+    :   '//' ~[\r\n]* -> skip
     ;
 
 
