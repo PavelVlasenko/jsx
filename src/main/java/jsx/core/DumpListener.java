@@ -70,6 +70,11 @@ public class DumpListener extends Java8ParserBaseListener
     }
 
     @Override
+    public void enterJsxBlock(@NotNull Java8ParserParser.JsxBlockContext ctx) {
+        super.enterJsxBlock(ctx);
+    }
+
+    @Override
     public void enterMethodInvocation(@NotNull Java8ParserParser.MethodInvocationContext ctx) {
         super.enterMethodInvocation(ctx);
     }

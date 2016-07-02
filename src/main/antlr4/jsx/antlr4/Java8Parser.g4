@@ -1817,5 +1817,5 @@ jsxAttributeName
 	;
 
 jsxContent
-	:	jsxElement jsxContent*
+	:	jsxElement | jsxBlock
 	;
