@@ -1,6 +1,6 @@
 package jsx.core;
 
-import jsx.antlr4.Java8Parser;
+import jsx.antlr4.Java8ParserParser;
 import jsx.antlr4.Java8ParserBaseListener;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.misc.NotNull;
@@ -10,47 +10,52 @@ public class DumpListener extends Java8ParserBaseListener
     private String sourceCode = "";
 
     @Override
-    public void enterPackageDeclaration(@NotNull Java8Parser.PackageDeclarationContext ctx) {
+    public void enterPackageDeclaration(@NotNull Java8ParserParser.PackageDeclarationContext ctx) {
         getText(ctx);
     }
 
     @Override
-    public void enterVariableDeclarator(@NotNull Java8Parser.VariableDeclaratorContext ctx) {
+    public void enterVariableDeclarator(@NotNull Java8ParserParser.VariableDeclaratorContext ctx) {
         ctx.getText();
     }
 
     @Override
-    public void enterConstructorDeclarator(@NotNull Java8Parser.ConstructorDeclaratorContext ctx) {
+    public void enterConstructorDeclarator(@NotNull Java8ParserParser.ConstructorDeclaratorContext ctx) {
         ctx.getText();
     }
 
     @Override
-    public void enterMethodDeclarator(@NotNull Java8Parser.MethodDeclaratorContext ctx) {
+    public void enterWhileStatement(@NotNull Java8ParserParser.WhileStatementContext ctx) {
+        super.enterWhileStatement(ctx);
+    }
+
+    @Override
+    public void enterMethodDeclarator(@NotNull Java8ParserParser.MethodDeclaratorContext ctx) {
         ctx.getText();
     }
 
     @Override
-    public void enterMethodBody(@NotNull Java8Parser.MethodBodyContext ctx) {
+    public void enterMethodBody(@NotNull Java8ParserParser.MethodBodyContext ctx) {
         super.enterMethodBody(ctx);
     }
 
     @Override
-    public void enterJsxElement(@NotNull Java8Parser.JsxElementContext ctx) {
+    public void enterJsxElement(@NotNull Java8ParserParser.JsxElementContext ctx) {
         super.enterJsxElement(ctx);
     }
 
-    @Override
-    public void enterJsxAttributeName(@NotNull Java8Parser.JsxAttributeNameContext ctx) {
-        super.enterJsxAttributeName(ctx);
-    }
+//    @Override
+//    public void enterJsxAttributeName(@NotNull Java8ParserParser.JsxAttributeNameContext ctx) {
+//        super.enterJsxAttributeName(ctx);
+//    }
+//
+//    @Override
+//    public void enterJsxAttributeValue(@NotNull Java8ParserParser.JsxAttributeValueContext ctx) {
+//        super.enterJsxAttributeValue(ctx);
+//    }
 
     @Override
-    public void enterJsxAttributeValue(@NotNull Java8Parser.JsxAttributeValueContext ctx) {
-        super.enterJsxAttributeValue(ctx);
-    }
-
-    @Override
-    public void enterMethodInvocation(@NotNull Java8Parser.MethodInvocationContext ctx) {
+    public void enterMethodInvocation(@NotNull Java8ParserParser.MethodInvocationContext ctx) {
         super.enterMethodInvocation(ctx);
     }
 

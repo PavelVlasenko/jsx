@@ -1,7 +1,7 @@
 package jsx.core;
 
 import jsx.antlr4.Java8Lexer;
-import jsx.antlr4.Java8Parser;
+import jsx.antlr4.Java8ParserParser;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -20,9 +20,17 @@ public class AstParser
                 "{\n" +
                 "    public void trivial()\n" +
                 "    {\n" +
-                "        <  div  />" +
+                "        <div/>" +
+                "<div /> " +
+                "<div></div>" +
+                "<div ></ div>" +
+                "System.out.println();" +
+                "<div><span/></div>" +
+                "<div><p><span/><span/></p></div>" +
                 "\n" +
                 "System.out.println();" +
+                "int i = 7;" +
+                "while(5< i){}" +
                 "    }\n" +
                 "\n" +
                 "}\n";
@@ -30,7 +38,7 @@ public class AstParser
         ANTLRInputStream input = new ANTLRInputStream(row);
         Java8Lexer lexer = new Java8Lexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
-        Java8Parser parser = new Java8Parser(tokens);
+        Java8ParserParser parser = new Java8ParserParser(tokens);
 
         ParserRuleContext tree = parser.compilationUnit();
 

@@ -431,6 +431,7 @@ LINE_COMMENT
     ;
 
 // JSX tokens
+
 JsxOpeningElement
     :   '<' JsxElementName    -> pushMode(JSX)
     ;
@@ -453,61 +454,38 @@ JsxElementNameChar
 mode JSX;
 
 JsxClosingElement
-    :   '</' JsxElementName '>'  -> popMode
+    :   JsxSlashOpenTag ' '* JsxIdentifier ' '* JsxClosingTag  -> popMode
     ;
 
-JsxSelfClosingTag
+JsxSlashOpenTag
+	:	'</'
+	;
+
+JsxSlashClosingTag
     :   '/>'   -> popMode
     ;
 
+JsxClosingTag
+	:	'>'  -> popMode
+	;
+
 JsxIdentifier
-    :   JsxIdentifierChar JsxIdentifierChar*
+    :   JsxIdentifierChar JsxIdentifier*
     ;
+
 
 fragment
 JsxIdentifierChar
     :    [:a-z]
     ;
 
-fragment
-JsxExpression
-    :   '{' SourceCharacter* '}'
-    ;
+JsxAttributeValueStartChar
+	:	('\u0022' | '\u0027')	->pushMode(ATR)
+	;
 
-JsxDoubleStringCharacters
-//    :   JsxDoubleStringCharacter JsxDoubleStringCharacter*
-: 'asdaskjdhkajsdb'
-    ;
-
-fragment
-JsxDoubleStringCharacter
-    :   SourceCharacter ~'\"'
-    ;
-
-JsxSingleStringCharacters
-//    :   JsxSingleStringCharacter JsxSingleStringCharacter*
-:'asdjbadsmsabm'
-    ;
-
-fragment
-JsxSingleStringCharacter
-    :   SourceCharacter ~'\''
-    ;
-
-fragment
-JsxText
-    :   SourceCharacter JsxText*
-    ;
-
-fragment
-JsxTextCharacter
-    :   SourceCharacter ~('{' | '}' | '<' | '>')*
-    ;
-
-fragment
-SourceCharacter
-    :   '\u0000'..'\uFFFF'
-    ;
+JsxExpressionStrartChar
+	:	'{'	->pushMode(EXP)
+	;
 
 JSX_WS  :  [ \t\r\n\u000C]+ -> skip
     ;
@@ -521,4 +499,68 @@ JSX_LINE_COMMENT
     ;
 
 
+mode EXP;
 
+JsxExpressionEndChar
+	:	'}'	->popMode
+	;
+
+mode ATR;
+
+JsxAttributeValueEndChar
+	:	('\u0022' | '\u0027') -> popMode
+	;
+
+JsxDoubleStringCharacters
+    :   JsxDoubleStringCharacter JsxDoubleStringCharacters*
+    ;
+
+fragment
+JsxDoubleStringCharacter
+    :   JsxText ~('\u0022')*
+    ;
+
+fragment
+JsxSingleStringCharacters
+    :   JsxSingleStringCharacter JsxSingleStringCharacters*
+    ;
+
+fragment
+JsxSingleStringCharacter
+    :   JsxText ~('\u0027')*
+    ;
+
+fragment
+JsxText
+    :   SourceCharacter JsxText*
+    ;
+
+fragment
+SourceCharacter
+    :	'\u0021'..'\u00FF'
+    |	~[\u002F\u003C\u003F]
+    ;
+
+ATR_WS  :  [ \t\r\n\u000C]+ -> skip
+	;
+
+
+
+//
+//fragment
+//JsxExpression
+//    :   '{' JsxText '}'
+//    ;
+//
+//
+//JSX_WS  :  [ \t\r\n\u000C]+ -> skip
+//    ;
+//
+//JSX_COMMENT
+//    :   '/*' .*? '*/' -> skip
+//    ;
+//
+//JSX_LINE_COMMENT
+//    :   '//' ~[\r\n]* -> skip
+//    ;
+//
