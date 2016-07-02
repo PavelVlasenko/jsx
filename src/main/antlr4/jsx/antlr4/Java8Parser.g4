@@ -1782,11 +1782,28 @@ LINE_COMMENT
 //JSX
 
 jsxElement
-	:	'<'	jsxElementName '>' jsxContent*	'</'	jsxElementName '>'
-	|	'<'	jsxElementName '/>'
+	:	'<'	jsxElementName jsxAttribute* '>' jsxContent*	'</'	jsxElementName '>'
+	|	'<'	jsxElementName jsxAttribute*'/>'
 	;
 
 jsxElementName
+	:	Identifier
+	;
+
+jsxSimpleAttributeValue
+	: 	Identifier
+	;
+
+jsxAttribute
+	:	jsxAttributeName '="' jsxSimpleAttributeValue '"'
+	|	jsxAttributeName '=' jsxBlockAttributeValue
+	;
+
+jsxBlockAttributeValue
+	:	block
+	;
+
+jsxAttributeName
 	:	Identifier
 	;
 

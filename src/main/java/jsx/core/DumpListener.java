@@ -44,15 +44,25 @@ public class DumpListener extends Java8ParserBaseListener
         super.enterJsxElement(ctx);
     }
 
-//    @Override
-//    public void enterJsxAttributeName(@NotNull Java8ParserParser.JsxAttributeNameContext ctx) {
-//        super.enterJsxAttributeName(ctx);
-//    }
-//
-//    @Override
-//    public void enterJsxAttributeValue(@NotNull Java8ParserParser.JsxAttributeValueContext ctx) {
-//        super.enterJsxAttributeValue(ctx);
-//    }
+    @Override
+    public void enterJsxAttribute(@NotNull Java8ParserParser.JsxAttributeContext ctx) {
+        super.enterJsxAttribute(ctx);
+    }
+
+    @Override
+    public void enterJsxAttributeName(@NotNull Java8ParserParser.JsxAttributeNameContext ctx) {
+        super.enterJsxAttributeName(ctx);
+    }
+
+    @Override
+    public void enterJsxSimpleAttributeValue(@NotNull Java8ParserParser.JsxSimpleAttributeValueContext ctx) {
+        super.enterJsxSimpleAttributeValue(ctx);
+    }
+
+    @Override
+    public void enterJsxBlockAttributeValue(@NotNull Java8ParserParser.JsxBlockAttributeValueContext ctx) {
+        super.enterJsxBlockAttributeValue(ctx);
+    }
 
     @Override
     public void enterMethodInvocation(@NotNull Java8ParserParser.MethodInvocationContext ctx) {

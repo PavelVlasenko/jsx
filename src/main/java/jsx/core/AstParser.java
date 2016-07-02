@@ -1,6 +1,6 @@
 package jsx.core;
 
-import jsx.antlr4.Java8Lexer;
+import jsx.antlr4.Java8ParserLexer;
 import jsx.antlr4.Java8ParserParser;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
@@ -20,8 +20,9 @@ public class AstParser
                 "{\n" +
                 "    public void trivial()\n" +
                 "    {\n" +
-                "        <div/>" +
-                "<div /> " +
+                "String s = \"asda\";        <div/>" +
+                "<div attsa=\"asdasd\"/>" +
+                "<div attsa={System.out.println();}/>" +
                 "<div></div>" +
                 "<div ></ div>" +
                 "System.out.println();" +
@@ -36,7 +37,7 @@ public class AstParser
                 "}\n";
 
         ANTLRInputStream input = new ANTLRInputStream(row);
-        Java8Lexer lexer = new Java8Lexer(input);
+        Java8ParserLexer lexer = new Java8ParserLexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         Java8ParserParser parser = new Java8ParserParser(tokens);
 
