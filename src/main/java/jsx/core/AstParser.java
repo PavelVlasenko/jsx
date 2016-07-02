@@ -22,7 +22,7 @@ public class AstParser
                 "    {\n" +
                 "String s = \"asda\";        <div/>" +
                 "<div attsa=\"asdasd\"/>" +
-                "<div attsa={System.out.println();}/>" +
+                "<div attsa={5+7}/>" +
                 "<div></div>" +
                 "<div ></ div>" +
                 "System.out.println();" +

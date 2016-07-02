@@ -1800,7 +1800,16 @@ jsxAttribute
 	;
 
 jsxBlockAttributeValue
-	:	block
+	:	jsxBlock
+	;
+
+jsxBlock
+	:	'{' jsxBlockExpression '}'
+	;
+
+jsxBlockExpression
+	:	blockStatements?
+	|	shiftExpression
 	;
 
 jsxAttributeName
