@@ -6,18 +6,22 @@ import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.tree.ErrorNode;
-import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import org.antlr.v4.runtime.tree.TerminalNode;
 import org.antlr.v4.runtime.tree.Tree;
 
-/**
- * @author Pavel Vlasenko
- */
-public class AstParser
+public class AstParser implements JavaParser
 {
     private StringBuilder builder = new StringBuilder();
+    private String [] addNothingTextArray = {"<", ">", ".", "/>"};
 
-    public ParserRuleContext generateAst()
+    /**
+     * Generates AST tree
+     *
+     * @param source Source code
+     * @return
+     */
+    @Override
+    public ParserRuleContext generateAst(String source)
     {
         String row = "\n" +
                 "public class MyTest\n" +
@@ -93,7 +97,7 @@ public class AstParser
                 "\t}\n" +
                 "}\n";
 
-        ANTLRInputStream input = new ANTLRInputStream(row);
+        ANTLRInputStream input = new ANTLRInputStream(source);
         Java8Lexer lexer = new Java8Lexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
         Java8Parser parser = new Java8Parser(tokens);
@@ -104,18 +108,21 @@ public class AstParser
         return tree;
     }
 
-
-    public String generateSourceCode2(ParserRuleContext tree)
+    /**
+     * Generates the source code of AST tree
+     *
+     * @param tree
+     * @return
+     */
+    @Override
+    public String generateSourceCode(Tree tree)
     {
-        ParseTreeWalker walker = new ParseTreeWalker();
-        DumpListener listener = new DumpListener();
-        walker.walk(listener, tree);
-
-        String result = listener.getSourceCode();
-        return result;
+        builder = new StringBuilder();
+        getText(tree);
+        return builder.toString();
     }
 
-    public void getText(Tree tree)
+    private void getText(Tree tree)
     {
         if(tree.getChildCount() == 0)
         {
@@ -124,8 +131,31 @@ public class AstParser
                 throw new IllegalArgumentException("Invalid node");
             }
 
-            //add
-            builder.append(((TerminalNode)tree).getText()).append(' ');
+            String text = ((TerminalNode)tree).getText();
+            //add nothing
+            for(String addNothingText : addNothingTextArray)
+            {
+                if (addNothingText.equals(text))
+                {
+                    builder.append(text);
+                    return;
+                }
+            }
+
+            //add newline before
+            if(text.equals("{"))
+            {
+                builder.append("\r\n").append(text);
+            }
+            //add newline after
+            else if(text.equals("}"))
+            {
+                builder.append(text).append("\r\n");
+            }
+            //add ws
+            else {
+                builder.append(text).append(' ');
+            }
         }
         else
         {
@@ -136,10 +166,4 @@ public class AstParser
         }
     }
 
-    public String generateSourceCode(Tree tree)
-    {
-        builder = new StringBuilder();
-        getText(tree);
-        return builder.toString();
-    }
 }
