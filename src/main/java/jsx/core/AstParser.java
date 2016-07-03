@@ -1,7 +1,7 @@
 package jsx.core;
 
-import jsx.antlr4.Java8ParserLexer;
-import jsx.antlr4.Java8ParserParser;
+import jsx.antlr4.Java8Lexer;
+import jsx.antlr4.Java8Parser;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.ParserRuleContext;
@@ -89,16 +89,11 @@ public class AstParser
                 "}\n";
 
         ANTLRInputStream input = new ANTLRInputStream(row);
-        Java8ParserLexer lexer = new Java8ParserLexer(input);
+        Java8Lexer lexer = new Java8Lexer(input);
         CommonTokenStream tokens = new CommonTokenStream(lexer);
-        Java8ParserParser parser = new Java8ParserParser(tokens);
+        Java8Parser parser = new Java8Parser(tokens);
 
         ParserRuleContext tree = parser.compilationUnit();
-
-//        ParseTreeWalker walker = new ParseTreeWalker();
-//        Java8BaseListener listener = new Java8BaseListener();
-//        walker.walk(listener, tree);
-
         return tree;
     }
 

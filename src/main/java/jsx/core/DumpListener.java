@@ -1,86 +1,86 @@
 package jsx.core;
 
-import jsx.antlr4.Java8ParserParser;
-import jsx.antlr4.Java8ParserBaseListener;
+import jsx.antlr4.Java8BaseListener;
+import jsx.antlr4.Java8Parser;
 import org.antlr.v4.runtime.ParserRuleContext;
 import org.antlr.v4.runtime.misc.NotNull;
 
-public class DumpListener extends Java8ParserBaseListener
+public class DumpListener extends Java8BaseListener
 {
     private String sourceCode = "";
 
     @Override
-    public void enterPackageDeclaration(@NotNull Java8ParserParser.PackageDeclarationContext ctx) {
+    public void enterPackageDeclaration(@NotNull Java8Parser.PackageDeclarationContext ctx) {
         getText(ctx);
     }
 
     @Override
-    public void enterVariableDeclarator(@NotNull Java8ParserParser.VariableDeclaratorContext ctx) {
+    public void enterVariableDeclarator(@NotNull Java8Parser.VariableDeclaratorContext ctx) {
         ctx.getText();
     }
 
     @Override
-    public void enterConstructorDeclarator(@NotNull Java8ParserParser.ConstructorDeclaratorContext ctx) {
+    public void enterConstructorDeclarator(@NotNull Java8Parser.ConstructorDeclaratorContext ctx) {
         ctx.getText();
     }
 
     @Override
-    public void enterWhileStatement(@NotNull Java8ParserParser.WhileStatementContext ctx) {
+    public void enterWhileStatement(@NotNull Java8Parser.WhileStatementContext ctx) {
         super.enterWhileStatement(ctx);
     }
 
     @Override
-    public void enterMethodDeclarator(@NotNull Java8ParserParser.MethodDeclaratorContext ctx) {
+    public void enterMethodDeclarator(@NotNull Java8Parser.MethodDeclaratorContext ctx) {
         ctx.getText();
     }
 
     @Override
-    public void enterMethodBody(@NotNull Java8ParserParser.MethodBodyContext ctx) {
+    public void enterMethodBody(@NotNull Java8Parser.MethodBodyContext ctx) {
         super.enterMethodBody(ctx);
     }
 
     @Override
-    public void enterJsxElement(@NotNull Java8ParserParser.JsxElementContext ctx) {
+    public void enterJsxElement(@NotNull Java8Parser.JsxElementContext ctx) {
         super.enterJsxElement(ctx);
     }
 
     @Override
-    public void enterJsxAttribute(@NotNull Java8ParserParser.JsxAttributeContext ctx) {
+    public void enterJsxAttribute(@NotNull Java8Parser.JsxAttributeContext ctx) {
         super.enterJsxAttribute(ctx);
     }
 
     @Override
-    public void enterJsxAttributeName(@NotNull Java8ParserParser.JsxAttributeNameContext ctx) {
+    public void enterJsxAttributeName(@NotNull Java8Parser.JsxAttributeNameContext ctx) {
         super.enterJsxAttributeName(ctx);
     }
 
     @Override
-    public void enterJsxDoubleStringAttributeValue(@NotNull Java8ParserParser.JsxDoubleStringAttributeValueContext ctx) {
+    public void enterJsxDoubleStringAttributeValue(@NotNull Java8Parser.JsxDoubleStringAttributeValueContext ctx) {
         super.enterJsxDoubleStringAttributeValue(ctx);
     }
 
     @Override
-    public void enterJsxSingleStringAttributeValue(@NotNull Java8ParserParser.JsxSingleStringAttributeValueContext ctx) {
+    public void enterJsxSingleStringAttributeValue(@NotNull Java8Parser.JsxSingleStringAttributeValueContext ctx) {
         super.enterJsxSingleStringAttributeValue(ctx);
     }
 
     @Override
-    public void enterJsxBlockAttributeValue(@NotNull Java8ParserParser.JsxBlockAttributeValueContext ctx) {
+    public void enterJsxBlockAttributeValue(@NotNull Java8Parser.JsxBlockAttributeValueContext ctx) {
         super.enterJsxBlockAttributeValue(ctx);
     }
 
     @Override
-    public void enterAssigmentExpression(@NotNull Java8ParserParser.AssigmentExpressionContext ctx) {
+    public void enterAssigmentExpression(@NotNull Java8Parser.AssigmentExpressionContext ctx) {
         super.enterAssigmentExpression(ctx);
     }
 
     @Override
-    public void enterJsxBlock(@NotNull Java8ParserParser.JsxBlockContext ctx) {
+    public void enterJsxBlock(@NotNull Java8Parser.JsxBlockContext ctx) {
         super.enterJsxBlock(ctx);
     }
 
     @Override
-    public void enterMethodInvocation(@NotNull Java8ParserParser.MethodInvocationContext ctx) {
+    public void enterMethodInvocation(@NotNull Java8Parser.MethodInvocationContext ctx) {
         super.enterMethodInvocation(ctx);
     }
 
