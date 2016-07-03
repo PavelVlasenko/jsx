@@ -55,8 +55,13 @@ public class DumpListener extends Java8ParserBaseListener
     }
 
     @Override
-    public void enterJsxSimpleAttributeValue(@NotNull Java8ParserParser.JsxSimpleAttributeValueContext ctx) {
-        super.enterJsxSimpleAttributeValue(ctx);
+    public void enterJsxDoubleStringAttributeValue(@NotNull Java8ParserParser.JsxDoubleStringAttributeValueContext ctx) {
+        super.enterJsxDoubleStringAttributeValue(ctx);
+    }
+
+    @Override
+    public void enterJsxSingleStringAttributeValue(@NotNull Java8ParserParser.JsxSingleStringAttributeValueContext ctx) {
+        super.enterJsxSingleStringAttributeValue(ctx);
     }
 
     @Override
@@ -65,8 +70,8 @@ public class DumpListener extends Java8ParserBaseListener
     }
 
     @Override
-    public void enterJsxBlockExpression(@NotNull Java8ParserParser.JsxBlockExpressionContext ctx) {
-        super.enterJsxBlockExpression(ctx);
+    public void enterAssigmentExpression(@NotNull Java8ParserParser.AssigmentExpressionContext ctx) {
+        super.enterAssigmentExpression(ctx);
     }
 
     @Override

@@ -1779,19 +1779,31 @@ LINE_COMMENT
     :   '//' ~[\r\n]* -> skip
     ;
 
-//JSX
+//JSX parse rules
 
 jsxElement
-	:	'<'	jsxElementName jsxAttribute* '>' jsxContent*	'</'	jsxElementName '>'
-	|	'<'	jsxElementName jsxAttribute*'/>'
+	:	jsxOpeningElement jsxChildren* jsxClosingElement
+	|	jsxSelfClosingElement
+	;
+
+jsxSelfClosingElement
+	:	'<'	jsxElementName jsxAttribute*'/>'
+	;
+
+jsxOpeningElement
+	:	'<'	jsxElementName jsxAttribute* '>'
+	;
+
+jsxChildren
+	:	jsxElement | jsxBlock
+    ;
+
+jsxClosingElement
+	:	'</' jsxElementName '>'
 	;
 
 jsxElementName
 	:	Identifier
-	;
-
-jsxSimpleAttributeValue
-	: 	StringLiteral
 	;
 
 jsxAttribute
@@ -1799,8 +1811,18 @@ jsxAttribute
 	;
 
 jsxAttributeValue
-	:	jsxSimpleAttributeValue
+	:	jsxDoubleStringAttributeValue
+	|	jsxSingleStringAttributeValue
 	|	jsxBlockAttributeValue
+	;
+
+jsxDoubleStringAttributeValue
+	: 	StringLiteral
+	;
+
+jsxSingleStringAttributeValue
+	:	CharacterLiteral
+	|	'\'' Identifier	'\''
 	;
 
 jsxBlockAttributeValue
@@ -1808,18 +1830,14 @@ jsxBlockAttributeValue
 	;
 
 jsxBlock
-	:	'{' jsxBlockExpression '}'
+	:	'{' assigmentExpression '}'
 	;
 
-jsxBlockExpression
+assigmentExpression
 	:	blockStatements?
 	|	shiftExpression
 	;
 
 jsxAttributeName
 	:	Identifier
-	;
-
-jsxContent
-	:	jsxElement | jsxBlock
 	;

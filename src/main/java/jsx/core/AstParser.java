@@ -19,12 +19,17 @@ public class AstParser
                 "{\n" +
                 "\tpublic void trivial()\n" +
                 "\t{\n" +
+                "List<String> g = new ArrayList<>();" +
+                "int p = 9;" +
+                "if(8<p){}\n" +
+                "String h = \"akjsnjads\";\n" +
+                "char m = 'a';" +
                 "\t\t<div />\n" +
                 "\t}\n" +
                 "\t\n" +
                 "\tpublic void simpleAttributes()\n" +
                 "\t{\n" +
-                "\t\t<div foo=\"noise\" bar=\"girls\" />\n" +
+                "\t\t<div foo='noise' bar='girls' />\n" +
                 "\t}\n" +
                 "\t\n" +
                 "\tpublic void simpleExpression()\n" +
