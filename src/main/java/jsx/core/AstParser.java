@@ -5,13 +5,18 @@ import jsx.antlr4.Java8Parser;
 import org.antlr.v4.runtime.ANTLRInputStream;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.ParserRuleContext;
+import org.antlr.v4.runtime.tree.ErrorNode;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
+import org.antlr.v4.runtime.tree.TerminalNode;
+import org.antlr.v4.runtime.tree.Tree;
 
 /**
  * @author Pavel Vlasenko
  */
 public class AstParser
 {
+    private StringBuilder builder = new StringBuilder();
+
     public ParserRuleContext generateAst()
     {
         String row = "\n" +
@@ -94,11 +99,13 @@ public class AstParser
         Java8Parser parser = new Java8Parser(tokens);
 
         ParserRuleContext tree = parser.compilationUnit();
+
+        String s = generateSourceCode(tree);
         return tree;
     }
 
 
-    public String generateSourceCode(ParserRuleContext tree)
+    public String generateSourceCode2(ParserRuleContext tree)
     {
         ParseTreeWalker walker = new ParseTreeWalker();
         DumpListener listener = new DumpListener();
@@ -106,5 +113,33 @@ public class AstParser
 
         String result = listener.getSourceCode();
         return result;
+    }
+
+    public void getText(Tree tree)
+    {
+        if(tree.getChildCount() == 0)
+        {
+            if (tree instanceof ErrorNode)
+            {
+                throw new IllegalArgumentException("Invalid node");
+            }
+
+            //add
+            builder.append(((TerminalNode)tree).getText()).append(' ');
+        }
+        else
+        {
+            for(int i = 0; i < tree.getChildCount(); ++i)
+            {
+                getText(tree.getChild(i));
+            }
+        }
+    }
+
+    public String generateSourceCode(Tree tree)
+    {
+        builder = new StringBuilder();
+        getText(tree);
+        return builder.toString();
     }
 }
