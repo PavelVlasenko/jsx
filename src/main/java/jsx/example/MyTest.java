@@ -4,7 +4,7 @@
 //{
 //    public void trivial()
 //    {
-//        <div/>
+//        <div nbas="asd"/>
 //    }
 //
 //}

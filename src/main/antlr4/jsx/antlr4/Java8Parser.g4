@@ -1791,12 +1791,16 @@ jsxElementName
 	;
 
 jsxSimpleAttributeValue
-	: 	Identifier
+	: 	StringLiteral
 	;
 
 jsxAttribute
-	:	jsxAttributeName '="' jsxSimpleAttributeValue '"'
-	|	jsxAttributeName '=' jsxBlockAttributeValue
+	: 	jsxAttributeName '=' jsxAttributeValue
+	;
+
+jsxAttributeValue
+	:	jsxSimpleAttributeValue
+	|	jsxBlockAttributeValue
 	;
 
 jsxBlockAttributeValue

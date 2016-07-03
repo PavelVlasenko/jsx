@@ -1,0 +1,21 @@
+        String row = "package jsx.example;\n" +
+                "\n" +
+                "public class MyTest\n" +
+                "{\n" +
+                "    public void trivial()\n" +
+                "    {\n" +
+                "String s = \"asda\";        <div/>" +
+                "<div attsa=\"asdasd\"/>" +
+                "<div attsa={5+7}/>" +
+                "<div>{System.out.println();}</div>" +
+                "<div ></ div>" +
+                "System.out.println();" +
+                "<div><span/></div>" +
+                "<div><p><span/><span/></p></div>" +
+                "\n" +
+                "System.out.println();" +
+                "int i = 7;" +
+                "while(5< i){}" +
+                "    }\n" +
+                "\n" +
+                "}\n";
