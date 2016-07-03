@@ -1779,7 +1779,7 @@ LINE_COMMENT
     :   '//' ~[\r\n]* -> skip
     ;
 
-//JSX
+//JSX parse rules
 
 jsxElement
 	:	'<'	jsxElementName jsxAttribute* '>' jsxContent*	'</'	jsxElementName '>'
